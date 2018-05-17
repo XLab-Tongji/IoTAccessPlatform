@@ -1,13 +1,14 @@
-package com.lab409.socket.demo;
+package com.lab409.socket.old;
 
-import com.lab409.socket.demo.Utils.Function;
+
+
+import com.lab409.socket.old.Utils.Function;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 
 class ServerReceiveRunnable implements Runnable{   // receive msg from client
@@ -80,7 +81,7 @@ public class TestThreadServer {    //server main function location
         // TODO Auto-generated method stub
         ServerSocket ss=null;
         ss=new ServerSocket(5652);
-        ArrayList<Socket> arrayList = new ArrayList<>();
+        ArrayList<Socket> arrayList = new ArrayList<Socket>();
         boolean has_samle_socket = false;
 
         Runnable r2=new ServerSendRunnable(arrayList);

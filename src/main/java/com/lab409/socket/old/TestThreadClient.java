@@ -1,4 +1,4 @@
-package com.lab409.socket.demo;
+package com.lab409.socket.old;
 
 import java.io.*;
 import java.net.Socket;
@@ -33,8 +33,6 @@ class ClientSendRunnable implements Runnable{
     }
 
 }
-
-
 
 
 class ClientReceiveRunnable implements Runnable{
