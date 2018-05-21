@@ -1,14 +1,11 @@
-package com.lab409.socket.old;
-
-
-
-import com.lab409.socket.old.Utils.Function;
+package com.lab409.socket.old.socket.server;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 
 class ServerReceiveRunnable implements Runnable{   // receive msg from client
@@ -25,7 +22,7 @@ class ServerReceiveRunnable implements Runnable{   // receive msg from client
         DataInputStream dis=null;
         DataOutputStream dos = null;
         String orderFromClient = null;
-        String result = null;
+        String result =  "asdfasdf"+"\r\n";
         try {
             os = s.getOutputStream();
             dos = new DataOutputStream(os);
@@ -33,9 +30,9 @@ class ServerReceiveRunnable implements Runnable{   // receive msg from client
                 is=s.getInputStream();
                 dis=new DataInputStream(is);
                 orderFromClient = dis.readUTF();
-                System.out.println("server received from " + s.getRemoteSocketAddress() + "  "+ orderFromClient);
-                result = Function.func(orderFromClient);
-                dos.writeUTF(result);
+                System.out.println("server received from " + s.getRemoteSocketAddress() + " : "+ orderFromClient);
+                //result = orderFromClient;
+                dos.writeUTF(orderFromClient+"\r\n");
 
             }
         } catch (IOException e) {
@@ -80,8 +77,8 @@ public class TestThreadServer {    //server main function location
     public static void main(String[] args) throws Exception {
         // TODO Auto-generated method stub
         ServerSocket ss=null;
-        ss=new ServerSocket(5652);
-        ArrayList<Socket> arrayList = new ArrayList<Socket>();
+        ss=new ServerSocket(8080);
+        ArrayList<Socket> arrayList = new ArrayList<>();
         boolean has_samle_socket = false;
 
         Runnable r2=new ServerSendRunnable(arrayList);

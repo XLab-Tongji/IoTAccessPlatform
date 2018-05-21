@@ -1,9 +1,9 @@
-package com.lab409.socket.demoServer.entity;
+package com.lab409.socket.demoServer.model;
 
 import java.io.Serializable;
 
 public class Sensor implements Serializable {
-    private Long id;
+    private Integer id;
     private String type;
     private String host;
     private String port;
@@ -11,7 +11,19 @@ public class Sensor implements Serializable {
     private String state;
     private String descr;
 
-    public Sensor(Long id, String type, String host, String port, String msg, String state, String descr) {
+    public Sensor() {}
+
+    public Sensor(Sensor sensor) {
+        this.id = sensor.id;
+        this.type = sensor.type;
+        this.host = sensor.host;
+        this.port = sensor.port;
+        this.msg = sensor.msg;
+        this.state = sensor.state;
+        this.descr = sensor.descr;
+    }
+
+    public Sensor(Integer id, String type, String host, String port, String msg, String state, String descr) {
         this.id = id;
         this.type = type;
         this.host = host;
@@ -21,11 +33,11 @@ public class Sensor implements Serializable {
         this.descr = descr;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

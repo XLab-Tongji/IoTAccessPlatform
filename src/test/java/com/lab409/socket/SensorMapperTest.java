@@ -1,6 +1,6 @@
 package com.lab409.socket;
 
-import com.lab409.socket.demoServer.entity.Sensor;
+import com.lab409.socket.demoServer.model.Sensor;
 import com.lab409.socket.demoServer.mapper.SensorMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class SensorMapperTest {
 
     @Test
     public void insert() {
-        sensorMapper.insert(new Sensor(new Long(1),"temp","localhost","1234","hello","online","made in china"));
+        sensorMapper.insert(new Sensor(2,"temp","localhost","1234","hello","online","made in china"));
     }
 
     @Test
