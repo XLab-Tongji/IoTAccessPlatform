@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <title>Spring Boot Demo - FreeMarker</title>
-    <link href="../static/css/index.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 </head>
 

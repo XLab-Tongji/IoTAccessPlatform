@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <title>Spring Boot Demo - FreeMarker</title>
-    <link href="../static/css/index.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 </head>
 
@@ -20,7 +20,7 @@
             timeout: 100000,
             success: function (result, textStatus) {
                 //alert(result);
-                if (result== '') alert("null")//getClientMsg();
+                if (result == '') alert("null")//getClientMsg();
                 // else {
                 document.getElementById("receive").innerText = "received : " + (++time).toString();
                 for (var i in result) {
@@ -68,17 +68,17 @@
         <td>state</td>
         <td>description</td>
     </tr>
-        <#list sensorList as list>
-            <tr id="${list_index}">
-                <td class="client_id">${list.getId()}</td>
-                <td class="client_type">${list.getType()}</td>
-                <td class="client_host">${list.getHost()}</td>
-                <td class="client_port">${list.getPort()}</td>
-                <td class="client_msg">${list.getMsg()}</td>
-                <td class="client_state">${list.getState()}</td>
-                <td class="client_descr">${list.getDescr()}</td>
-            </tr>
-        </#list>
+    <#list sensorList as list>
+        <tr id="${list_index}">
+            <td class="client_id">${list.getId()}</td>
+            <td class="client_type">${list.getType()}</td>
+            <td class="client_host">${list.getHost()}</td>
+            <td class="client_port">${list.getPort()}</td>
+            <td class="client_msg">${list.getMsg()}</td>
+            <td class="client_state">${list.getState()}</td>
+            <td class="client_descr">${list.getDescr()}</td>
+        </tr>
+    </#list>
 </table>
 <br/>
 

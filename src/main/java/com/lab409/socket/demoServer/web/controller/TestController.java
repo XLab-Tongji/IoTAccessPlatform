@@ -1,4 +1,4 @@
-package com.lab409.socket.demoServer.controller;
+package com.lab409.socket.demoServer.web.controller;
 
 import com.lab409.socket.demoServer.mapper.UserMapper;
 import com.lab409.socket.demoServer.netty.handler.SocketServerHandler;

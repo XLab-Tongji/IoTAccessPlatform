@@ -56,9 +56,9 @@ public class SocketServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String information = (String)msg;
-        Sensor sensor = ClientMsgInterpreter.getSensorFromString(information);
-        if(sensor != null) sensorList.add(sensor);
-        ++receive_num;
+        //Sensor sensor = ClientMsgInterpreter.getSensorFromString(information);
+        //if(sensor != null) sensorList.add(sensor);
+        //++receive_num;
         System.out.println(information + " " + receive_num);
         ctx.writeAndFlush("received\n\r");
     }
