@@ -1,23 +1,62 @@
 package com.lab409.socket.demoServer.mapper;
 
+import com.lab409.socket.demoServer.enums.SensorState;
+import com.lab409.socket.demoServer.enums.SensorType;
 import com.lab409.socket.demoServer.model.Sensor;
+import com.lab409.socket.demoServer.model.SensorConfig;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+// checked
+
 public interface SensorMapper {
-   @Select("SELECT * FROM sensors")
-   List<Sensor> getAll();
 
-   @Select("SELECT * FROM sensors WHERE id=#{id}")
-   Sensor getOne(Integer id);
+    @Select("select * from sensor where id=#{id}")
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "type", column = "type", javaType = SensorType.class),
+            @Result(property = "host", column = "host"),
+            @Result(property = "port", column = "port"),
+            @Result(property = "state", column = "state", javaType = SensorState.class),
+            @Result(property = "descr", column = "descr"),
+            @Result(property = "latestMsg", column = "msg"),
+            @Result(property = "changedTime", column = "time"),
+            @Result(property = "sensorConfig", column = "config_id", javaType = SensorConfig.class,
+                    one = @One(select = "com.lab409.socket.demoServer.mapper.SensorConfigMapper.getOneById")),
+            @Result(property = "sensorMsgs", column = "id", javaType = List.class,
+                    many = @Many(select = "com.lab409.socket.demoServer.mapper.SensorMsgMapper.getManyBySensorId"))
+    })
+    public Sensor getOneById(@Param("id") Long id);
 
-   @Insert("INSERT INTO sensors(id, type, descr, host, port, msg, state) VALUES(#{id}, #{type}, #{descr}, #{host}, #{port}, #{msg}, #{state})")
-   void insert(Sensor sensor);
+    @Select("select * from sensor where config_id=#{id}")
+    @Results({
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "type", column = "type", javaType = SensorType.class),
+            @Result(property = "host", column = "host"),
+            @Result(property = "port", column = "port"),
+            @Result(property = "state", column = "state", javaType = SensorState.class),
+            @Result(property = "descr", column = "descr"),
+            @Result(property = "latestMsg", column = "msg"),
+            @Result(property = "changedTime", column = "time"),
+            @Result(property = "sensorConfig", column = "config_id", javaType = SensorConfig.class,
+                    one = @One(select = "com.lab409.socket.demoServer.mapper.SensorConfigMapper.getOneById")),
+            @Result(property = "sensorMsgs", column = "id", javaType = List.class,
+                    many = @Many(select = "com.lab409.socket.demoServer.mapper.SensorMsgMapper.getManyBySensorId"))
 
-   @Update("UPDATE sensors SET msg={msg}, state=#{state} WHERE id=#{id}")
+    })
+    public List<Sensor> getManyByConfigId(@Param("id") Long id);
+
+
+    @Insert("INSERT INTO sensor(config_id, type, descr ,host, port, msg, state, time) " +
+            "VALUES(#{sensorConfig.id}, #{type}, #{descr}, #{host}, #{port}, #{latestMsg}, #{state}, #{changedTime})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void insert(Sensor sensor);
+
+    @Update("update sensor set msg={msg}, state=#{state} WHERE id=#{id}")
+
     void update(Sensor sensor);
 
-   @Delete("DELETE FROM sensors WHERE id=#{id}")
-    void delete(Integer id);
+    @Delete("deleted from sensor where id=#{id}")
+    void delete(Long id);
 }

@@ -1,34 +1,36 @@
 package com.lab409.socket.demoServer.mapper;
 
-import com.lab409.socket.demoServer.model.UserEntity;
-import com.lab409.socket.demoServer.enums.UserSexEnum;
+import com.lab409.socket.demoServer.model.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 public interface UserMapper {
 	
-	@Select("SELECT * FROM users")
+	@Select("SELECT * FROM user")
 	@Results({
-		@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
-		@Result(property = "nickName", column = "nick_name")
+			@Result(property = "id",  column = "id"),
+			@Result(property = "name", column = "name"),
+			@Result(property = "pwd", column="pwd")
 	})
-	List<UserEntity> getAll();
+	List<User> getAll();
 	
-	@Select("SELECT * FROM users WHERE id = #{id}")
+	@Select("SELECT * FROM user WHERE id = #{id}")
 	@Results({
-		@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
-		@Result(property = "nickName", column = "nick_name")
+			@Result(property = "id",  column = "id"),
+			@Result(property = "name", column = "name"),
+			@Result(property = "pwd", column="pwd")
 	})
-	UserEntity getOne(Long id);
+	User getOne(Long id);
 
-	@Insert("INSERT INTO users(userName,passWord,user_sex) VALUES(#{userName}, #{passWord}, #{userSex})")
-	void insert(UserEntity user);
+	@Insert("INSERT INTO user(name,pwd) VALUES(#{name}, #{pwd})")
+	@Options(useGeneratedKeys = true,keyProperty = "id")
+	void insert(User user);
 
-	@Update("UPDATE users SET userName=#{userName},nick_name=#{nickName} WHERE id =#{id}")
-	void update(UserEntity user);
+	@Update("UPDATE user SET name=#{name}, pwd=#{pwd} WHERE id =#{id}")
+	void update(User user);
 
-	@Delete("DELETE FROM users WHERE id =#{id}")
+	@Delete("DELETE FROM user WHERE id =#{id}")
 	void delete(Long id);
 
 }

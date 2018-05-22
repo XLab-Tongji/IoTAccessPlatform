@@ -1,14 +1,21 @@
 package com.lab409.socket.demoServer.viewmodel;
 
+import com.lab409.socket.demoServer.enums.SensorType;
 import com.lab409.socket.demoServer.model.Sensor;
+import com.lab409.socket.demoServer.model.SensorConfig;
+import com.lab409.socket.demoServer.model.SensorMsg;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 public class SocketClientViewModel extends Sensor {
     private Integer row_id;
 
-    public SocketClientViewModel(Integer id, String type, String host, String port, String msg, String state, String descr, int row_id) {
-        super(id, type, host, port, msg, state, descr);
+    public SocketClientViewModel(Long id, SensorConfig sensorConfig, SensorType type, String descr, String host, String port, String latestMsg, String state, Timestamp changedTime, List<SensorMsg> sensorMsgs, Integer row_id) {
+        super(id, sensorConfig, type, descr, host, port, latestMsg, state, changedTime, sensorMsgs);
         this.row_id = row_id;
     }
+
     public SocketClientViewModel(Sensor sensor, Integer row_id) {
         super(sensor);
         this.row_id = row_id;

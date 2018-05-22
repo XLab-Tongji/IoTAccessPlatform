@@ -1,5 +1,6 @@
 package com.lab409.socket.demoServer.web.controller;
 
+import com.lab409.socket.demoServer.enums.SensorType;
 import com.lab409.socket.demoServer.mapper.UserMapper;
 import com.lab409.socket.demoServer.netty.handler.SocketServerHandler;
 import com.lab409.socket.demoServer.model.Sensor;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -53,9 +55,9 @@ public class TestController {
 
         List<Sensor> sensorList = new ArrayList<>();
         for (Integer i = 0; i < clientNum; i++) {
-            Sensor sensor = new Sensor
-                    (i, "unknown", "unknown", "unknown", "unknown", "offline","unknown");
-            sensorList.add(sensor);
+            //Sensor sensor = new Sensor
+              //      (new Long(i), new Long(1),SensorType.valueOf("thunder"), "unknown", "unknown", "unknown", "offline","unknown",new Date());
+            //sensorList.add(sensor);
         }
         modelAndView.addObject("sensorList", sensorList);
         return modelAndView;

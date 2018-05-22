@@ -1,52 +1,82 @@
 package com.lab409.socket.demoServer.model;
 
+import com.lab409.socket.demoServer.enums.SensorType;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
 public class Sensor implements Serializable {
-    private Integer id;
-    private String type;
+    private Long id;
+    private SensorConfig sensorConfig;
+    private SensorType type;
+    private String descr;
     private String host;
     private String port;
-    private String msg;
+    private String latestMsg;
     private String state;
-    private String descr;
+    private Timestamp changedTime;
+    private List<SensorMsg> sensorMsgs;
 
     public Sensor() {}
 
     public Sensor(Sensor sensor) {
         this.id = sensor.id;
+        this.sensorConfig = sensor.sensorConfig;
         this.type = sensor.type;
         this.host = sensor.host;
         this.port = sensor.port;
-        this.msg = sensor.msg;
+        this.latestMsg = sensor.latestMsg;
         this.state = sensor.state;
         this.descr = sensor.descr;
+        this.changedTime = sensor.changedTime;
+        this.sensorMsgs = sensor.sensorMsgs;
     }
 
-    public Sensor(Integer id, String type, String host, String port, String msg, String state, String descr) {
+    public Sensor(Long id, SensorConfig sensorConfig, SensorType type, String descr, String host, String port, String latestMsg, String state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
         this.id = id;
+        this.sensorConfig = sensorConfig;
         this.type = type;
+        this.descr = descr;
         this.host = host;
         this.port = port;
-        this.msg = msg;
+        this.latestMsg = latestMsg;
         this.state = state;
-        this.descr = descr;
+        this.changedTime = changedTime;
+        this.sensorMsgs = sensorMsgs;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getType() {
+    public SensorConfig getSensorConfig() {
+        return sensorConfig;
+    }
+
+    public void setSensorConfig(SensorConfig sensorConfig) {
+        this.sensorConfig = sensorConfig;
+    }
+
+    public SensorType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SensorType type) {
         this.type = type;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
     public String getHost() {
@@ -65,12 +95,12 @@ public class Sensor implements Serializable {
         this.port = port;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getLatestMsg() {
+        return latestMsg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setLatestMsg(String latestMsg) {
+        this.latestMsg = latestMsg;
     }
 
     public String getState() {
@@ -81,16 +111,24 @@ public class Sensor implements Serializable {
         this.state = state;
     }
 
-    public String getDescr() {
-        return descr;
+    public Date getChangedTime() {
+        return changedTime;
     }
 
-    public void setDescr(String descr) {
-        this.descr = descr;
+    public void setChangedTime(Timestamp changedTime) {
+        this.changedTime = changedTime;
+    }
+
+    public List<SensorMsg> getSensorMsgs() {
+        return sensorMsgs;
+    }
+
+    public void setSensorMsgs(List<SensorMsg> sensorMsgs) {
+        this.sensorMsgs = sensorMsgs;
     }
 
     @Override
     public String toString() {
-        return "id:" + id + " type:" + type + " descr:" + descr + " host:" + host + " port" + port + " msg" + msg + " state" + state;
+        return "id:" + id + " type:" + type.name() + " descr:" + descr + " host:" + host + "port: " + port + "msg: " + latestMsg + " state" + state + "changedTime: "+changedTime;
     }
 }
