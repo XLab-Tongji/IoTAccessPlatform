@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Sensor implements Serializable {
     private Long id;
-    private SensorConfig sensorConfig;
+    private SensorGroup sensorGroup;
     private SensorType type;
     private String descr;
     private String host;
@@ -23,7 +23,7 @@ public class Sensor implements Serializable {
 
     public Sensor(Sensor sensor) {
         this.id = sensor.id;
-        this.sensorConfig = sensor.sensorConfig;
+        this.sensorGroup = sensor.sensorGroup;
         this.type = sensor.type;
         this.host = sensor.host;
         this.port = sensor.port;
@@ -34,9 +34,9 @@ public class Sensor implements Serializable {
         this.sensorMsgs = sensor.sensorMsgs;
     }
 
-    public Sensor(Long id, SensorConfig sensorConfig, SensorType type, String descr, String host, String port, String latestMsg, String state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
+    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, String state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
         this.id = id;
-        this.sensorConfig = sensorConfig;
+        this.sensorGroup = sensorGroup;
         this.type = type;
         this.descr = descr;
         this.host = host;
@@ -55,12 +55,12 @@ public class Sensor implements Serializable {
         this.id = id;
     }
 
-    public SensorConfig getSensorConfig() {
-        return sensorConfig;
+    public SensorGroup getSensorGroup() {
+        return sensorGroup;
     }
 
-    public void setSensorConfig(SensorConfig sensorConfig) {
-        this.sensorConfig = sensorConfig;
+    public void setSensorGroup(SensorGroup sensorGroup) {
+        this.sensorGroup = sensorGroup;
     }
 
     public SensorType getType() {

@@ -20,7 +20,7 @@
             timeout: 100000,
             success: function (result, textStatus) {
                 //alert(result);
-                if (result == '') alert("null")//getClientMsg();
+                if (result == '') alert("null");//getClientMsg();
                 // else {
                 document.getElementById("receive").innerText = "received : " + (++time).toString();
                 for (var i in result) {
@@ -83,5 +83,4 @@
 <br/>
 
 </body>
-
 </html>

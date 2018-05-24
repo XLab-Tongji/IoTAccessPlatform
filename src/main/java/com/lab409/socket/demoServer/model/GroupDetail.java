@@ -2,17 +2,17 @@ package com.lab409.socket.demoServer.model;
 
 import com.lab409.socket.demoServer.enums.SensorType;
 
-public class ConfigDetail {
-    private Long configId;
+public class GroupDetail {
+    private Long groupId;
     private SensorType type;
     private Long sensorNum;
 
     public Long getConfigId() {
-        return configId;
+        return groupId;
     }
 
-    public void setConfigId(Long configId) {
-        this.configId = configId;
+    public void setConfigId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public SensorType getType() {

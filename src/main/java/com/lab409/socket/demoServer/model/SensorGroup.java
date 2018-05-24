@@ -1,13 +1,12 @@
 package com.lab409.socket.demoServer.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class SensorConfig implements Serializable {
+public class SensorGroup implements Serializable {
 
-    private List<ConfigDetail> configDetails;
+    private List<GroupDetail> groupDetails;
 
     public  Long id;
 
@@ -25,12 +24,12 @@ public class SensorConfig implements Serializable {
         this.id = id;
     }
 
-    public List<ConfigDetail> getConfigDetails() {
-        return configDetails;
+    public List<GroupDetail> getGroupDetails() {
+        return groupDetails;
     }
 
-    public void setConfigDetails(List<ConfigDetail> configDetails) {
-        this.configDetails = configDetails;
+    public void setGroupDetails(List<GroupDetail> groupDetails) {
+        this.groupDetails = groupDetails;
     }
 
     public Timestamp getCreateTime() {
