@@ -20,7 +20,7 @@ public class GroupDetailMapperTest {
     @Test
     public void insert() {
         GroupDetail groupDetail = new GroupDetail();
-        groupDetail.setConfigId(Long.valueOf(4));
+        groupDetail.setGroupId(Long.valueOf(4));
         groupDetail.setType(SensorType.humidity);
         groupDetail.setSensorNum(Long.valueOf(2));
         detailMapper.insert(groupDetail);
@@ -36,7 +36,7 @@ public class GroupDetailMapperTest {
     public void queryMany() {
         List<GroupDetail> details = detailMapper.getManyByConfigId(Long.valueOf(4));
         for (GroupDetail detail : details) {
-            System.out.println(detail.getConfigId() + " " + detail.getType()+ " "+ detail.getSensorNum());
+            System.out.println(detail.getGroupId() + " " + detail.getType()+ " "+ detail.getSensorNum());
         }
     }
 }

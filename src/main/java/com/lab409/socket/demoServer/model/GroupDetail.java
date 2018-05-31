@@ -7,11 +7,11 @@ public class GroupDetail {
     private SensorType type;
     private Long sensorNum;
 
-    public Long getConfigId() {
+    public Long getGroupId() {
         return groupId;
     }
 
-    public void setConfigId(Long groupId) {
+    public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
 

@@ -55,4 +55,9 @@ public class SensorGroup implements Serializable {
     public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
+
+    @Override
+    public String toString() {
+        return "id : " + id + " user : " + createUser;
+    }
 }

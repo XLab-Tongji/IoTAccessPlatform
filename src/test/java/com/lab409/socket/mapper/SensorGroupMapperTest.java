@@ -38,7 +38,7 @@ public class SensorGroupMapperTest {
         List<Sensor> sensors = config.getSensors();
         System.out.println(config.getId() + " " +config.getCreateUser() +" "+ config.getCreateTime());
         for (GroupDetail detail :details){
-            System.out.println(detail.getConfigId()+" "+detail.getType()+" "+detail.getSensorNum());
+            System.out.println(detail.getGroupId()+" "+detail.getType()+" "+detail.getSensorNum());
         }
         for (Sensor sensor : sensors) {
             //System.out.println(sensor.getId() + " " + sensor.getType() + " " +sensor.getLatestMsg());

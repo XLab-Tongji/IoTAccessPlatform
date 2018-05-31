@@ -48,8 +48,8 @@ public interface SensorMapper {
     public List<Sensor> getManyByConfigId(@Param("id") Long id);
 
 
-    @Insert("INSERT INTO sensor(config_id, type, descr ,host, port, msg, state, time) " +
-            "VALUES(#{sensorConfig.id}, #{type}, #{descr}, #{host}, #{port}, #{latestMsg}, #{state}, #{changedTime})")
+    @Insert("INSERT INTO sensor(group_id, type, descr ,host, port, msg, state, time) " +
+            "VALUES(#{sensorGroup.id}, #{type}, #{descr}, #{host}, #{port}, #{latestMsg}, #{state}, #{changedTime})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Sensor sensor);
 
