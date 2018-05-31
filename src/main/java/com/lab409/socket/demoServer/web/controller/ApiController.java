@@ -58,7 +58,7 @@ public class ApiController {
      */
 
     @GetMapping("/getAllGroup")
-    public SensorGroup getAllGroup() {
+    public List<SensorGroup> getAllGroup() {
         /*SensorGroup sensorGroup = new SensorGroup();
         sensorGroup.setId(Long.valueOf(1));
         List<Sensor> sensors = new ArrayList<>();
@@ -91,11 +91,13 @@ public class ApiController {
         sensorGroup.setGroupDetails(details);*/
 
 
-        SensorGroup sensorGroup = groupMapper.getOneById(Long.valueOf(1));
-        for (Sensor sensor : sensorGroup.getSensors()) {
-            sensor.setSensorGroup(null);    //不加这一行代码会导致json循环序列化问题
+        List<SensorGroup> groups = groupMapper.getAll();
+        for(SensorGroup group : groups ) {
+            for (Sensor sensor : group.getSensors()) {
+                sensor.setSensorGroup(null);    //不加这一行代码会导致json循环序列化问题
+            }
         }
-        return sensorGroup;
+        return groups;
     }
 
 

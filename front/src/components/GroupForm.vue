@@ -1,6 +1,9 @@
 <template>
     <el-dialog title="dialog" :show-close="false" :visible="dialogFormVisible">
         <el-form :model="form">
+            <el-form-item label="group name" :label-width="formLabelWidth">
+                <el-input v-model="form.name" auto-complete="off"></el-input>
+            </el-form-item>
             <el-form-item label="temperature num" :label-width="formLabelWidth">
                 <el-input v-model="form.temperature" auto-complete="off"></el-input>
             </el-form-item>
@@ -27,6 +30,7 @@ export default {
   data() {
     return {
       form: {
+        name : '',
         temperature: 0,
         humidity: 0,
         thunder: 0,
@@ -43,11 +47,12 @@ export default {
       this.$axios
         .post('http://127.0.0.1:8082/api/addNewGroup', {
           createUser: 'huzehao',
+          name : this.form.name,
           groupDetails: [
-            { type: 'temperature', sensorNum: form.temperature },
-            { type: 'humidity', sensorNum: form.humidity },
-            { type: 'thunder', sensorNum: form.thunder },
-            { type: 'pressure', sensorNum: form.pressure }
+            { type: 'temperature', sensorNum: this.form.temperature },
+            { type: 'humidity', sensorNum: this.form.humidity },
+            { type: 'thunder', sensorNum: this.form.thunder },
+            { type: 'pressure', sensorNum: this.form.pressure }
           ]
         })
         .then(res => {

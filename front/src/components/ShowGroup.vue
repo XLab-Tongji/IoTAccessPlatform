@@ -6,17 +6,17 @@
           <div slot="header" class="clearfix">
             <div class="groupName">{{g.name}}</div>
             <div class="groupDetail">
-              <span>{{g.creater}}</span><br>
-              <span>{{g.time}}</span>
+              <span>{{g.createUser}}</span><br>
+              
             </div>
           </div>
-          <div v-for="o in g.client" :key="o.type" class="text item" style="{float: left;}">
-            {{o.type + ":" + o.num }}
+          <div v-for="o in g.groupDetails" :key="o.type" class="text item" style="{float: left;}">
+            {{o.type + ":" + o.sensorNum}}
           </div>
         </el-card>
       </button>
     </div>
-    <el-button type="text" @click="addNewGroup()">add new Group</el-button>
+    <el-button plain type="prime" @click="addNewGroup()">add new Group</el-button>
     <group-form :dialogFormVisible="dialogFormVisible" v-on:cancelForm="dialogFormVisible=false"></group-form>
 
   </div>
@@ -26,19 +26,21 @@
 
 
 <script>
-import group from '../assets/data/group.json'
+//import group from '../assets/data/group.json'
 import GroupForm from './GroupForm.vue'
 
 export default {
   name: 'show-group',
   data() {
     return {
-      groupData: group,
+      groupData: [],
       formLabelWidth: '120px',
       dialogFormVisible: false
     }
   },
-  mounted() {},
+  mounted() {
+    this.getAllGroup();
+  },
   components: { GroupForm },
   methods: {
     c(object) {
@@ -58,6 +60,7 @@ export default {
       this.$axios
         .get('http://127.0.0.1:8082/api/getAllGroup')
         .then(res => {
+          this.groupData = res.data;
           console.log(res)
         })
         .catch(err => {

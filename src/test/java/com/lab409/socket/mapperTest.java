@@ -38,7 +38,7 @@ public class mapperTest {
 
     @Test
     public void insertUser() {
-        userMapper.insert(new User(Long.valueOf(3),"dogtwo","123456"));
+        userMapper.insert(new User(Long.valueOf(2),"dogtwo","123456"));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class mapperTest {
     public void insertSensor() {
         Sensor sensor = new Sensor();
         SensorGroup group = new SensorGroup();
-        group.setId(Long.valueOf(3));
+        group.setId(Long.valueOf(2));
         sensor.setSensorGroup(group);
         sensor.setType(SensorType.thunder);
         sensor.setDescr("made in china");
@@ -119,5 +119,13 @@ public class mapperTest {
                 System.out.println(sensor);
             }
         }
+    }
+
+    @Test
+    public void insertAll() {
+        //insertGroup();
+        insertDetail();
+        insertSensor();
+        insertMsg();
     }
 }
