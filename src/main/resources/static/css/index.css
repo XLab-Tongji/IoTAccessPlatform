@@ -1,3 +1,6 @@
+h2{
+    color : darkgray;
+}
 table, td, th {
     border: 1px solid black;
     text-align : center;
@@ -12,5 +15,3 @@ td {
 tr  {
     width: 550px;
 }
-
-
