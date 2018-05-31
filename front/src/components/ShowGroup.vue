@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="g in groupData" :key="g" class="box-card">
-      <button class="card-btn" @click="c(g.creater)">
+      <button class="card-btn" @click="getAllGroup()">
         <el-card>
           <div slot="header" class="clearfix">
             <div class="groupName">{{g.name}}</div>
@@ -35,27 +35,37 @@ export default {
     return {
       groupData: group,
       formLabelWidth: '120px',
-      dialogFormVisible: false,
+      dialogFormVisible: false
     }
   },
+  mounted() {},
   components: { GroupForm },
   methods: {
     c(object) {
       this.$axios
-        .get('http://127.0.0.1:8082/api/test')
-        .then(function(response) {
-          var d = response.data
-          console.log(d)
-          for (var val in d) {
-            console.log(d[val])
-          }
+        .post('http://127.0.0.1:8082/api/postTest', {
+          sender: 'client',
+          content: 'hello server!'
+        })
+        .then(function(res) {
+          console.log(res.data['sender'] + ' ' + res.data['content'])
         })
         .catch(function(res) {
           console.log(res)
         })
     },
-    addNewGroup : function() {
-      this.dialogFormVisible = true;
+    getAllGroup: function() {
+      this.$axios
+        .get('http://127.0.0.1:8082/api/getAllGroup')
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    addNewGroup: function() {
+      this.dialogFormVisible = true
     }
   }
 }

@@ -45,7 +45,7 @@ public interface SensorMapper {
                     many = @Many(select = "com.lab409.socket.demoServer.mapper.SensorMsgMapper.getManyBySensorId"))
 
     })
-    public List<Sensor> getManyByConfigId(@Param("id") Long id);
+    public List<Sensor> getManyByGroupId(@Param("id") Long id);
 
 
     @Insert("INSERT INTO sensor(group_id, type, descr ,host, port, msg, state, time) " +

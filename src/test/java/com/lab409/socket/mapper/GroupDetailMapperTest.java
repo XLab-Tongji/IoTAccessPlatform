@@ -34,7 +34,7 @@ public class GroupDetailMapperTest {
 
     @Test
     public void queryMany() {
-        List<GroupDetail> details = detailMapper.getManyByConfigId(Long.valueOf(4));
+        List<GroupDetail> details = detailMapper.getManyByGroupId(Long.valueOf(4));
         for (GroupDetail detail : details) {
             System.out.println(detail.getGroupId() + " " + detail.getType()+ " "+ detail.getSensorNum());
         }

@@ -6,13 +6,15 @@ import java.util.List;
 
 public class SensorGroup implements Serializable {
 
-    private List<GroupDetail> groupDetails;
-
     public  Long id;
+
+    public String name;
 
     private Timestamp createTime;
 
     private String createUser;
+
+    private List<GroupDetail> groupDetails;
 
     private List<Sensor> sensors;
 
@@ -22,6 +24,14 @@ public class SensorGroup implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<GroupDetail> getGroupDetails() {
