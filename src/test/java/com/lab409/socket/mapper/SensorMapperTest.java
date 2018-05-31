@@ -46,7 +46,7 @@ public class SensorMapperTest {
 
     @Test
     public void queryMany() {
-        List<Sensor> sensors = sensorMapper.getManyByConfigId(Long.valueOf(4));
+        List<Sensor> sensors = sensorMapper.getManyByGroupId(Long.valueOf(4));
         for (Sensor sensor : sensors) {
             System.out.println(sensor.getId() + " " + sensor.getType() + " " + sensor.getLatestMsg());
             for (SensorMsg msg : sensor.getSensorMsgs()) {

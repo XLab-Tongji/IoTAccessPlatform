@@ -19,7 +19,7 @@ public interface GroupDetailMapper {
             @Result(property = "type", column = "type"),
             @Result(property = "sensorNum", column = "num")
     })
-    public List<GroupDetail> getManyByConfigId(@Param("id") Long id);
+    public List<GroupDetail> getManyByGroupId(@Param("id") Long id);
 
     @Select("select  * from group_detail where group_id = #{id} and type = #{type}")
     @Results({

@@ -22,6 +22,7 @@ create table `sensor_state`(
 
 create table `sensor_group` (
   `id` bigint(20) not null auto_increment comment '主键',
+  `name` varchar(50) default 'Unnamed' comment 'group name',
   `create_user` varchar(20) default 'admin' comment '创始人',
   `create_time` datetime default now() comment '创造时间',
   primary key (`id`)
@@ -89,7 +90,7 @@ insert into `sensor_type` values ('temperature');
 insert into `sensor_type` values ('humidity');
 insert into `sensor_type` values ('pressure');
 
-insert into `sensor_group`(`create_user`,`create_time`) values ('admin',now());
+insert into `sensor_group`(`name`,`create_user`,`create_time`) values ('database test group','admin',now());
 
 insert into `group_detail`(`group_id`,`type`,`num`) values ('1','thunder',2);
 insert into `group_detail`(`group_id`,`type`,`num`) values ('1','temperature',2);

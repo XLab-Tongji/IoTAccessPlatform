@@ -1,17 +1,17 @@
 <template>
-    <el-dialog title="dialog" :show-close="false" :visible="dialogFormVisible" >
+    <el-dialog title="dialog" :show-close="false" :visible="dialogFormVisible">
         <el-form :model="form">
             <el-form-item label="temperature num" :label-width="formLabelWidth">
                 <el-input v-model="form.temperature" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="humidity num" :label-width="formLabelWidth">
-                <el-input v-model="form.humidity" auto-complete="off"></el-input>                
+                <el-input v-model="form.humidity" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="thunder num" :label-width="formLabelWidth">
-                <el-input v-model="form.thunder" auto-complete="off"></el-input>                
+                <el-input v-model="form.thunder" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="pressure num" :label-width="formLabelWidth">
-                <el-input v-model="form.pressure" auto-complete="off"></el-input>                
+                <el-input v-model="form.pressure" auto-complete="off"></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer" :label-width="formLabelWidth">
@@ -23,27 +23,43 @@
 
 <script>
 export default {
-  name: "group-form",
+  name: 'group-form',
   data() {
     return {
-      form : {
+      form: {
         temperature: 0,
         humidity: 0,
         thunder: 0,
         pressure: 0
       },
-      formLabelWidth : "120px"
-    };
+      formLabelWidth: '120px'
+    }
   },
-  methods : {
-      cancelForm : function() {
-          this.$emit('cancelForm');
-      },
-      upload(form) {
-          this.$axios.post("http://127.0.0.1:8082/api/")
-      } 
+  methods: {
+    cancelForm: function() {
+      this.$emit('cancelForm')
+    },
+    upload(form) {
+      this.$axios
+        .post('http://127.0.0.1:8082/api/addNewGroup', {
+          createUser: 'huzehao',
+          groupDetails: [
+            { type: 'temperature', sensorNum: form.temperature },
+            { type: 'humidity', sensorNum: form.humidity },
+            { type: 'thunder', sensorNum: form.thunder },
+            { type: 'pressure', sensorNum: form.pressure }
+          ]
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      location.reload()
+    }
   },
-  props : ["dialogFormVisible"]
-};
+  props: ['dialogFormVisible']
+}
 </script>
 

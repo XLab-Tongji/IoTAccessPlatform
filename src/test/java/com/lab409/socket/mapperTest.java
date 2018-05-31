@@ -3,6 +3,7 @@ package com.lab409.socket;
 import com.lab409.socket.demoServer.enums.SensorType;
 import com.lab409.socket.demoServer.mapper.*;
 import com.lab409.socket.demoServer.model.*;
+import com.lab409.socket.demoServer.utils.DataUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class mapperTest {
     @Autowired
     GroupDetailMapper detailMapper;
 
+    @Autowired
+    DataUtil util;
+
     @Test
     public void insertUser() {
         userMapper.insert(new User(Long.valueOf(3),"dogtwo","123456"));
@@ -41,13 +45,14 @@ public class mapperTest {
     public void insertGroup() {
         SensorGroup sensorGroup = new SensorGroup();
         sensorGroup.setCreateUser("dogtwo");
+        sensorGroup.setName("group2");
         groupMapper.insert(sensorGroup);
     }
 
     @Test
     public void insertDetail() {
         GroupDetail detail = new GroupDetail();
-        detail.setGroupId(Long.valueOf(3));
+        detail.setGroupId(Long.valueOf(2));
         detail.setSensorNum(Long.valueOf(2));
         detail.setType(SensorType.thunder);
         detailMapper.insert(detail);
@@ -91,6 +96,14 @@ public class mapperTest {
             msgMapper.insert(msg);
             msg.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
             msgMapper.insert(msg);
+        }
+    }
+
+    @Test
+    public void querySensor() {
+        List<Sensor> sensors = sensorMapper.getManyByGroupId(Long.valueOf(1));
+        for (Sensor sensor : sensors) {
+            System.out.println(sensor);
         }
     }
 

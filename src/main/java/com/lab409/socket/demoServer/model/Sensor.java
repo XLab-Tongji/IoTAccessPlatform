@@ -1,5 +1,6 @@
 package com.lab409.socket.demoServer.model;
 
+import com.lab409.socket.demoServer.enums.SensorState;
 import com.lab409.socket.demoServer.enums.SensorType;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class Sensor implements Serializable {
     private String host;
     private String port;
     private String latestMsg;
-    private String state;
+    private SensorState state;
     private Timestamp changedTime;
     private List<SensorMsg> sensorMsgs;
 
@@ -34,7 +35,7 @@ public class Sensor implements Serializable {
         this.sensorMsgs = sensor.sensorMsgs;
     }
 
-    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, String state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
+    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
         this.id = id;
         this.sensorGroup = sensorGroup;
         this.type = type;
@@ -103,11 +104,11 @@ public class Sensor implements Serializable {
         this.latestMsg = latestMsg;
     }
 
-    public String getState() {
+    public SensorState getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(SensorState state) {
         this.state = state;
     }
 
