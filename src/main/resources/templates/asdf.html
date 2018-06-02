@@ -6,7 +6,6 @@
     <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
     <script type="text/javascript">
-        /*<![CDATA[*/
 
         var stompClient = null;
 
@@ -23,8 +22,9 @@
 
             //连接
             $scope.connect = function() {
-                var socket = new SockJS('/my-websocket');
-                stompClient = Stomp.over(socket);
+                //var socket = new SockJS('http://localhost:8082/my-websocket');
+                //stompClient = Stomp.over(socket);
+                stompClient = Stomp.client("ws://localhost:8082/my-websocket");
                 stompClient.connect({}, function(frame) {
                     // 注册发送消息
                     stompClient.subscribe('/topic/send', function(msg) {
@@ -57,7 +57,6 @@
                 }));
             }
         });
-        /*]]>*/
     </script>
 </head>
 <body ng-app="app" ng-controller="MainController">
@@ -69,8 +68,8 @@
 <br />
 <br />
 <div ng-show="data.connected">
-    <label>{{data.time}}</label> <br /> <br /> <input type="text"
-                                                      ng-model="data.message" placeholder="请输入内容..." />
+    <label>{{data.time}}</label> <br /> <br />
+    <input type="text" ng-model="data.message" placeholder="请输入内容..." />
     <button ng-click="send()" type="button">发送</button>
     <br /> <br /> 消息列表： <br />
     <table>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <show-group></show-group>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -28,3 +28,4 @@ export default {
 
 
 
+z

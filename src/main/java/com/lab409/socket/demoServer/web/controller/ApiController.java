@@ -1,23 +1,17 @@
 package com.lab409.socket.demoServer.web.controller;
 
-import ch.qos.logback.core.joran.spi.NoAutoStart;
 import com.lab409.socket.demoServer.enums.SensorState;
 import com.lab409.socket.demoServer.enums.SensorType;
-import com.lab409.socket.demoServer.mapper.GroupDetailMapper;
 import com.lab409.socket.demoServer.mapper.SensorGroupMapper;
 import com.lab409.socket.demoServer.model.GroupDetail;
 import com.lab409.socket.demoServer.model.Sensor;
 import com.lab409.socket.demoServer.model.SensorGroup;
-import com.lab409.socket.demoServer.model.SensorMsg;
 import com.lab409.socket.demoServer.utils.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -59,38 +53,6 @@ public class ApiController {
 
     @GetMapping("/getAllGroup")
     public List<SensorGroup> getAllGroup() {
-        /*SensorGroup sensorGroup = new SensorGroup();
-        sensorGroup.setId(Long.valueOf(1));
-        List<Sensor> sensors = new ArrayList<>();
-        Sensor sensor = new Sensor();
-        sensor.setId(Long.valueOf(1));
-        sensor.setHost("localhost");
-        sensor.setPort("8080");
-        sensor.setState(SensorState.online);
-        sensor.setType(SensorType.temperature);
-        sensor.setChangedTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())));
-        sensor.setLatestMsg("tomorrow is well");
-        List<SensorMsg> msgs = new ArrayList<>();
-        SensorMsg msg = new SensorMsg();
-        msg.setId(Long.valueOf(1));
-        msg.setSensorId(Long.valueOf(1));
-        msg.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())));
-        msg.setMsg("tomorrow is well");
-        msgs.add(msg);
-        msgs.add(msg);
-        sensor.setSensorMsgs(msgs);
-        sensors.add(sensor);
-        sensor.setSensorGroup(sensorGroup);
-        sensorGroup.setSensors(sensors);
-        GroupDetail detail = new GroupDetail();
-        detail.setGroupId(Long.valueOf(1));
-        detail.setType(SensorType.temperature);
-        detail.setSensorNum(Long.valueOf(1));
-        List<GroupDetail> details = new ArrayList<>();
-        details.add(detail);
-        sensorGroup.setGroupDetails(details);*/
-
-
         List<SensorGroup> groups = groupMapper.getAll();
         for(SensorGroup group : groups ) {
             for (Sensor sensor : group.getSensors()) {
@@ -122,3 +84,35 @@ class Msg {
 }
 
 
+
+
+        /*SensorGroup sensorGroup = new SensorGroup();
+        sensorGroup.setId(Long.valueOf(1));
+        List<Sensor> sensors = new ArrayList<>();
+        Sensor sensor = new Sensor();
+        sensor.setId(Long.valueOf(1));
+        sensor.setHost("localhost");
+        sensor.setPort("8080");
+        sensor.setState(SensorState.online);
+        sensor.setType(SensorType.temperature);
+        sensor.setChangedTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())));
+        sensor.setLatestMsg("tomorrow is well");
+        List<SensorMsg> msgs = new ArrayList<>();
+        SensorMsg msg = new SensorMsg();
+        msg.setId(Long.valueOf(1));
+        msg.setSensorId(Long.valueOf(1));
+        msg.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())));
+        msg.setMsg("tomorrow is well");
+        msgs.add(msg);
+        msgs.add(msg);
+        sensor.setSensorMsgs(msgs);
+        sensors.add(sensor);
+        sensor.setSensorGroup(sensorGroup);
+        sensorGroup.setSensors(sensors);
+        GroupDetail detail = new GroupDetail();
+        detail.setGroupId(Long.valueOf(1));
+        detail.setType(SensorType.temperature);
+        detail.setSensorNum(Long.valueOf(1));
+        List<GroupDetail> details = new ArrayList<>();
+        details.add(detail);
+        sensorGroup.setGroupDetails(details);*/

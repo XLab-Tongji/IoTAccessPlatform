@@ -16,11 +16,11 @@ public class DataUtil {
     public SensorGroupMapper groupMapper;
 
     @Autowired
-    SensorMsgMapper msgMapper;
+    public SensorMsgMapper msgMapper;
 
     @Autowired
-    SensorMapper sensorMapper;
+    public SensorMapper sensorMapper;
 
     @Autowired
-    UserMapper userMapper;
+    public UserMapper userMapper;
 }

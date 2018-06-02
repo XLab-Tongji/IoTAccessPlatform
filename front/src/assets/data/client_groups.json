@@ -1,0 +1,18 @@
+{
+  "thunder": [
+    { "id": 1, "msg": "msg of thunder", "interval": 10 },
+    { "id": 2, "msg": "msg of thunder", "interval": 100 }
+  ],
+  "humidity": [
+    { "id": 3, "msg": "msg of thunder", "interval": 10 },
+    { "id": 4, "msg": "msg of thunder", "interval": 10 }
+  ],
+  "pressure": [
+    { "id": 5, "msg": "msg of thunder", "interval": 10 },
+    { "id": 6, "msg": "msg of thunder", "interval": 10 }
+  ],
+  "temperature": [
+    { "id": 7, "msg": "msg of thunder", "interval": 10 },
+    { "id": 8, "msg": "msg of thunder", "interval": 10 }
+  ]
+}

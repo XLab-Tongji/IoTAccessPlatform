@@ -1,13 +1,13 @@
 <template>
   <div>
     <div v-for="g in groupData" :key="g" class="box-card">
-      <button class="card-btn" @click="getAllGroup()">
+      <button class="card-btn" @click="useThisGroup(g.id)">
         <el-card>
           <div slot="header" class="clearfix">
             <div class="groupName">{{g.name}}</div>
             <div class="groupDetail">
               <span>{{g.createUser}}</span><br>
-              
+
             </div>
           </div>
           <div v-for="o in g.groupDetails" :key="o.type" class="text item" style="{float: left;}">
@@ -39,28 +39,15 @@ export default {
     }
   },
   mounted() {
-    this.getAllGroup();
+    this.getAllGroup()
   },
   components: { GroupForm },
   methods: {
-    c(object) {
-      this.$axios
-        .post('http://127.0.0.1:8082/api/postTest', {
-          sender: 'client',
-          content: 'hello server!'
-        })
-        .then(function(res) {
-          console.log(res.data['sender'] + ' ' + res.data['content'])
-        })
-        .catch(function(res) {
-          console.log(res)
-        })
-    },
     getAllGroup: function() {
       this.$axios
         .get('http://127.0.0.1:8082/api/getAllGroup')
         .then(res => {
-          this.groupData = res.data;
+          this.groupData = res.data
           console.log(res)
         })
         .catch(err => {
@@ -69,6 +56,9 @@ export default {
     },
     addNewGroup: function() {
       this.dialogFormVisible = true
+    },
+    useThisGroup : function(id) {
+      this.$router.push("/observe");
     }
   }
 }
