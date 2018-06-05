@@ -1,118 +1,74 @@
 <template>
     <div>
-        <el-row :gutter="20" style="margin-top : 100px">
-            <el-col :span="12">
+        <el-tabs style="margin-top:80px" type="card" v-model="tapActiveName" @tap-click="handleTapClick">
+            <el-tab-pane label="temperature" name="temperature">
                 <div>
-                    <el-table :data="temperatureData" border>
-                        <el-table-column label="temperature">
-                            <el-table-column prop="id" label="id" width="100">
-                            </el-table-column>
-                            <el-table-column label="msg">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.msg" placeholder="请输入需要发送的内容"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="update" width="90">
-                                <template slot-scope="scope">
-                                    <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.$index, scope.row.msg)">update</el-button>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="switch" width="70">
-                                <template slot-scope="scope">
-                                    <el-switch v-model="scope.row.active" @change="msgSwitch" on-color="#00A854" off-color="#F04134" on-value=true off-value=false on-text="on" off-text="off"></el-switch>
-                                </template>
-                            </el-table-column>
-                        </el-table-column>
-
-                    </el-table>
+                    <el-row :gutter="10">
+                        <el-col :span="12">
+                            <client-config-table :tableData="temperatureData.slice(0,temperatureData.length/2)" :clientType="temperature">
+                            </client-config-table>
+                        </el-col>
+                        <el-col :span="12">
+                            <client-config-table :table-data="temperatureData.slice(temperatureData.length/2,temperatureData.length)">
+                            </client-config-table>
+                        </el-col>
+                    </el-row>
                 </div>
-            </el-col>
+            </el-tab-pane>
 
-            <el-col :span="12">
+            <el-tab-pane label="humidity" name="humidity">
                 <div>
-                    <el-table :data="humidityData" border>
-                        <el-table-column label="humidity">
-                            <el-table-column prop="id" label="id" width="100">
-                            </el-table-column>
-                            <el-table-column label="msg">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.msg" placeholder="请输入需要发送的内容"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="update" width="90">
-                                <template slot-scope="scope">
-                                    <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.$index, scope.row.msg)">update</el-button>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="switch" width="70">
-                                <template slot-scope="scope">
-                                    <el-switch v-model="scope.row.active" @change="msgSwitch" on-color="#00A854" off-color="#F04134" on-value=true off-value=false on-text="on" off-text="off"></el-switch>
-                                </template>
-                            </el-table-column>
-                        </el-table-column>
-                    </el-table>
+                    <el-row :gutter="10">
+                        <el-col :span="12">
+                            <client-config-table :table-data="humidityData.slice(0,humidityData.length/2)">
+                            </client-config-table>
+                        </el-col>
+                        <el-col :span="12">
+                            <client-config-table :table-data="humidityData.slice(humidityData.length/2, humidityData.length)">
+                            </client-config-table>
+                        </el-col>
+                    </el-row>
                 </div>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="12">
+            </el-tab-pane>
+            <el-tab-pane label="pressure" name="pressure">
                 <div>
-                    <el-table :data="pressureData" border>
-                        <el-table-column label="pressure">
-                            <el-table-column prop="id" label="id" width="100">
-                            </el-table-column>
-                            <el-table-column label="msg">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.msg" placeholder="请输入需要发送的内容"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="update" width="90">
-                                <template slot-scope="scope">
-                                    <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.$index, scope.row.msg)">update</el-button>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="switch" width="70">
-                                <template slot-scope="scope">
-                                    <el-switch v-model="scope.row.active" @change="msgSwitch" on-color="#00A854" off-color="#F04134" on-value=true off-value=false on-text="on" off-text="off"></el-switch>
-                                </template>
-                            </el-table-column>
-                        </el-table-column>
-
-                    </el-table>
+                    <el-row :gutter="10">
+                        <el-col :span="12">
+                            <client-config-table :table-data="pressureData.slice(0, pressureData.length/2)">
+                            </client-config-table>
+                        </el-col>
+                        <el-col :span="12">
+                            <client-config-table :table-data="pressureData.slice(pressureData.length/2, pressureData.length)">
+                            </client-config-table>
+                        </el-col>
+                    </el-row>
                 </div>
-            </el-col>
-            <el-col :span="12">
+            </el-tab-pane>
+            <el-tab-pane label="thunder" name="thunder">
                 <div>
-                    <el-table :data="thunderData" border>
-                        <el-table-column label="tunder">
-                            <el-table-column prop="id" label="id" width="100">
-                            </el-table-column>
-                            <el-table-column label="msg">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.msg" placeholder="请输入需要发送的内容"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="update" width="90">
-                                <template slot-scope="scope">
-                                    <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.$index, scope.row.msg)">update</el-button>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="switch" width="70">
-                                <template slot-scope="scope">
-                                    <el-switch v-model="scope.row.active" @change="msgSwitch" on-color="#00A854" off-color="#F04134" on-value=true off-value=false on-text="on" off-text="off"></el-switch>
-                                </template>
-                            </el-table-column>
-                        </el-table-column>
-                    </el-table>
+                    <el-row :gutter="10">
+                        <el-col :span="12">
+                            <client-config-table :table-data="thunderData.slice(0,thunderData.length/2)">
+                            </client-config-table>
+                        </el-col>
+                        <el-col :span="12">
+                            <client-config-table :table-data="thunderData.slice(thunderData.length/2,thunderData.length)">
+                            </client-config-table>
+                        </el-col>
+                    </el-row>
                 </div>
-            </el-col>
-        </el-row>
+            </el-tab-pane>
+            <el-tab-pane label="observe" name="observe">
+                <observe-page></observe-page>
+            </el-tab-pane>
+        </el-tabs>
     </div>
 </template>
  
 <script>
 import client_groups from '../assets/data/client_groups.json'
+import ClientConfigTable from './common/ClientConfigTable.vue'
+import ObservePage from './common/ObservePage.vue'
 export default {
   name: 'client-config',
   data() {
@@ -120,15 +76,25 @@ export default {
       temperatureData: client_groups['temperature'],
       thunderData: client_groups['thunder'],
       pressureData: client_groups['pressure'],
-      humidityData: client_groups['humidity']
+      humidityData: client_groups['humidity'],
+      tapActiveName: 'temperature',
+      activeName: 'second'
     }
   },
+  components: { ClientConfigTable, ObservePage },
   methods: {
+    handleTapClick(tap, event) {},
+    handleClick(tab, event) {
+      console.log(tab, event)
+    },
     updateSendingMsg(index, msg) {
       console.log('index : ' + index + ' msg: ' + msg)
     },
     msgSwitch(active) {
       console.log('active : ' + active)
+    },
+    goToObservePage() {
+        this.$router.push("/observe")
     }
   }
 }
