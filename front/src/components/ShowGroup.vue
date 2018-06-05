@@ -23,8 +23,6 @@
 </template>
 
 
-
-
 <script>
 //import group from '../assets/data/group.json'
 import GroupForm from './GroupForm.vue'
@@ -57,8 +55,9 @@ export default {
     addNewGroup: function() {
       this.dialogFormVisible = true
     },
-    useThisGroup : function(id) {
-      this.$router.push("/observe");
+    useThisGroup: function(id) {
+      this.$router.push('/config')
+      //this.$router.push("/observe");
     }
   }
 }
