@@ -10,9 +10,11 @@
 
             </div>
           </div>
-          <div v-for="o in g.groupDetails" :key="o.type" class="text item" style="{float: left;}">
-            {{o.type + ":" + o.sensorNum}}
-          </div>
+          <el-form size="mini" :label-position="left" v-for="detail in g.groupDetails" :key="detail.type">
+            <el-form-item :label="detail.type + ' : '" label-width="100px">
+              <span>{{detail.sensorNum}}</span>
+            </el-form-item>
+          </el-form>
         </el-card>
       </button>
     </div>
