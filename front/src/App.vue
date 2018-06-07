@@ -7,11 +7,10 @@
 
 <script>
 import PageHeader from './components/PageHeader.vue'
-import ShowGroup from  './components/ShowGroup.vue'
 
 export default {
   name: 'App',
-  components: { PageHeader, ShowGroup }
+  components: { PageHeader }
 }
 </script>
 

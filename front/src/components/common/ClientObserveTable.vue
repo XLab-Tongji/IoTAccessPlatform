@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <el-row>
@@ -81,20 +80,18 @@
         </el-row>
 
         <el-button type="text" @click="jump()">jump to home</el-button>
-        <div>{{websocketData}}</div>
-        <el-button type="text" @click="send()">send</el-button>
     </div>
 
 </template>
 
 <script>
-import data from '../../assets/data/clients.json'
 import Stomp from 'stompjs'
-
+import Bus from '../../eventBus'
 export default {
-  name: 'observe-clients',
+  name: 'client-observe-table',
   data() {
     return {
+      groupId: 0,
       tableData: null,
       tableIndex: {},
       client: null,
@@ -103,7 +100,7 @@ export default {
       websocketData: null
     }
   },
-  computed() {},
+  props: ['groupId'],
   mounted() {
     this.connect()
   },
@@ -113,27 +110,25 @@ export default {
     },
     onConnected(frame) {
       console.log('connected: ' + frame)
-      this.clientSubscription = this.client.subscribe(
-        '/topic/client',
-        this.getClient
-      )
+      this.$axios
+        .get('http://127.0.0.1:8082/api/getSensors', {
+          params: {
+            id: this.groupId
+          }
+        })
+        .then(res => {
+          console.log(res.data)
+          this.tableData = res.data
+          var index = 0
+          for (var i of this.tableData) {
+            console.log(i['id'])
+            this.tableIndex[i['id']] = index++
+          }
+          this.msgSubscription = this.client.subscribe('/topic/clientMg', this.getClientMsg)
+        })
     },
     onFailed(frame) {
       console.log('failed: ' + frame)
-    },
-    getClient(frame) {
-      this.tableData = JSON.parse(frame.body)
-      console.log(frame)
-      var index = 0
-      for (var i of this.tableData) {
-        console.log(i['id'])
-        this.tableIndex[i['id']] = index++
-      }
-      this.clientSubscription.unsubscribe()
-      this.msgSubscription = this.client.subscribe(
-        '/topic/clientMsg',
-        this.getClientMsg
-      )
     },
     getClientMsg(frame) {
       var msgs = JSON.parse(frame.body)
@@ -144,10 +139,6 @@ export default {
         console.log(this.tableIndex[msg['id']])
         this.tableData[this.tableIndex[msg['id']]]['latestMsg'] = msg['msg']
       }
-    },
-    send() {
-      this.client.send('/application/clientSend', {}, null)
-      this.tableData[0]['latestMsg'] = 'asdfasdfasdf'
     },
     connect() {
       this.client = Stomp.client('ws://localhost:8082/my-websocket')

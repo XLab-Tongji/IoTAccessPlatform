@@ -5,7 +5,7 @@
                 <div>
                     <el-row :gutter="10">
                         <el-col :span="12">
-                            <client-config-table :tableData="temperatureData.slice(0,temperatureData.length/2)" :clientType="temperature">
+                            <client-config-table @updateSendingMsg="updateSendingMsg" :tableData="temperatureData.slice(0,temperatureData.length/2)" :clientType="temperature">
                             </client-config-table>
                         </el-col>
                         <el-col :span="12">
@@ -59,46 +59,77 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane label="observe" name="observe">
-                <observe-page></observe-page>
+                <client-observe-table :groupId="groupId"></client-observe-table>
             </el-tab-pane>
         </el-tabs>
     </div>
 </template>
  
 <script>
-import client_groups from '../assets/data/client_groups.json'
+//import client_groups from '../assets/data/client_groups.json'
 import ClientConfigTable from './common/ClientConfigTable.vue'
-import ObservePage from './common/ObservePage.vue'
+import ClientObserveTable from './common/ClientObserveTable.vue'
+import Bus from '../eventBus'
 export default {
-  name: 'client-config',
+  name: 'client-page',
   data() {
     return {
-      temperatureData: client_groups['temperature'],
-      thunderData: client_groups['thunder'],
-      pressureData: client_groups['pressure'],
-      humidityData: client_groups['humidity'],
+      temperatureData: null, //client_groups['temperature'],
+      thunderData: null, //client_groups['thunder'],
+      pressureData: null, //client_groups['pressure'],
+      humidityData: null, //client_groups['humidity'],
       tapActiveName: 'temperature',
-      activeName: 'second'
+      activeName: 'second',
+      client : null,
+      sendSubcribe : null
     }
   },
-  components: { ClientConfigTable, ObservePage },
+  props: ['groupId'],
+  components: { ClientConfigTable, ClientObserveTable },  
+  mounted() {
+    this.connect()      
+    this.$axios
+      .get('http://127.0.0.1:8082/api/getSensorsDividedByType', {
+        params: {
+          id: this.groupId
+        }
+      })
+      .then(res => {
+        this.temperatureData = res.data['temperature']
+        this.humidityData = res.data['humidity']
+        this.pressureData = res.data['pressure']
+        this.thunderData = res.data['thunder']
+      })
+  },
   methods: {
     handleTapClick(tap, event) {},
     handleClick(tab, event) {
       console.log(tab, event)
     },
-    updateSendingMsg(index, msg) {
-      console.log('index : ' + index + ' msg: ' + msg)
+    updateSendingMsg(id, msg, interval) {
+      this.client.send('/application/send', {}, JSON.stringify({
+          'message' : id + " " + msg + " " +  interval
+      }))
+      console.log('id: ' + id + ' msg: ' + msg + ' interval: ' + interval)
+      //console.log('index : ' + index + ' msg: ' + msg)
     },
     msgSwitch(active) {
       console.log('active : ' + active)
     },
-    goToObservePage() {
-        this.$router.push("/observe")
+    onConnected() {
+        this.sendSubcribe = this.client.subscribe('/topic/send',function(res){
+
+        })
+    },
+    onFailed() {},
+    connect() {
+      this.client = Stomp.client('ws://localhost:8082/my-websocket')
+      this.client.connect({}, this.onConnected, this.onFailed)
     }
   }
 }
 </script>
+
 
 <style>
 .el-row {

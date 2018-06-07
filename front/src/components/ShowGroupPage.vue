@@ -19,6 +19,7 @@
       </button>
     </div>
     <el-button plain type="prime" @click="addNewGroup()">add new Group</el-button>
+    <el-button plain type="prime" @click="sendId()"> send</el-button>
     <group-form :dialogFormVisible="dialogFormVisible" v-on:cancelForm="dialogFormVisible=false"></group-form>
 
   </div>
@@ -28,9 +29,10 @@
 <script>
 //import group from '../assets/data/group.json'
 import GroupForm from './GroupForm.vue'
+import Bus from '../eventBus'
 
 export default {
-  name: 'show-group',
+  name: 'show-group-page',
   data() {
     return {
       groupData: [],
@@ -57,9 +59,11 @@ export default {
     addNewGroup: function() {
       this.dialogFormVisible = true
     },
+    sendId() {
+      Bus.$emit('id', 1)
+    },
     useThisGroup: function(id) {
-      this.$router.push('/config')
-      //this.$router.push("/observe");
+      this.$router.push({ name: 'client-page', params: { groupId: id } })
     }
   }
 }

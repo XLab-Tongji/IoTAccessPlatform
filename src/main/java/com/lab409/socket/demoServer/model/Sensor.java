@@ -18,7 +18,9 @@ public class Sensor implements Serializable {
     private String latestMsg;
     private SensorState state;
     private Timestamp changedTime;
+    private Long interval;
     private List<SensorMsg> sensorMsgs;
+
 
     public Sensor() {}
 
@@ -33,9 +35,10 @@ public class Sensor implements Serializable {
         this.descr = sensor.descr;
         this.changedTime = sensor.changedTime;
         this.sensorMsgs = sensor.sensorMsgs;
+        this.interval = sensor.interval;
     }
 
-    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs) {
+    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs, Long interval) {
         this.id = id;
         this.sensorGroup = sensorGroup;
         this.type = type;
@@ -46,6 +49,7 @@ public class Sensor implements Serializable {
         this.state = state;
         this.changedTime = changedTime;
         this.sensorMsgs = sensorMsgs;
+        this.interval = interval;
     }
 
     public Long getId() {
@@ -126,6 +130,14 @@ public class Sensor implements Serializable {
 
     public void setSensorMsgs(List<SensorMsg> sensorMsgs) {
         this.sensorMsgs = sensorMsgs;
+    }
+
+    public Long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Long interval) {
+        this.interval = interval;
     }
 
     @Override

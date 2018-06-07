@@ -1,21 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import ShowGroup from '../components/ShowGroup.vue'
-import ClientConfig from '../components/ClientConfig.vue'
+import ShowGroupPage from '../components/ShowGroupPage.vue'
+import ClientPage from '../components/ClientPage.vue'
+
 
 Vue.use(Router)
 
 const routers = [
   {
     path: '/',
-    name: 'show-group',
-    component: ShowGroup
+    name: 'show-group-page',
+    component: ShowGroupPage
   },
   {
-    path : '/config',
-    name: 'client-config',
-    component: ClientConfig
+    path : '/config/:groupId',
+    name: 'client-page',
+    component: ClientPage,
+    props : true
   }
 ]
 

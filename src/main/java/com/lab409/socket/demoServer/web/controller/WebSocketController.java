@@ -87,7 +87,7 @@ public class WebSocketController {
         Random random = new Random();
         List<SensorMsgTest> msgList = new ArrayList<>();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 1; i < 9; i++) {
             SensorMsgTest test = new SensorMsgTest();
             test.id = i;
             test.msg = "id : " + i + " send: " + random.nextInt(100);

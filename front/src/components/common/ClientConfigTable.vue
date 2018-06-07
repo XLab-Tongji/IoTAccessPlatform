@@ -33,12 +33,17 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+
+  },
   props: ['tableData','clientType'],
   methods: {
     updateSendingMsg(id, msg, interval) {
-      console.log('id: ' + id + ' msg: ' + msg + ' interval: ' + interval)
+      //console.log('id: ' + id + ' msg: ' + msg + ' interval: ' + interval)
+      this.$emit('updateSendingMsg',id, msg, interval)
     },
     updateClientState(id, active) {
+        //this.$axios.post('http://127.0.0.1:8082/')
       console.log('id: ' + id + 'active: ' + active)
     }
   }

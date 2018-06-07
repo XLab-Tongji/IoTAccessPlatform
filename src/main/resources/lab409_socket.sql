@@ -49,6 +49,7 @@ create table `sensor` (
   `state` varchar(20) default 'offline' comment '传感器是否在线',
   `msg` varchar(200) default null comment '该传感器的最近一条消息',
   `time` datetime default now() comment '该传感器状态最近一次更新的时间',
+  `interval` bigint(20) not null default 1 comment '改传感器发送消息的时间间隔',
   primary key (`id`),
   foreign key (`group_id`) references `sensor_group`(`id`),
   foreign key (`type`) references `sensor_type`(`typename`),
@@ -90,7 +91,7 @@ insert into `sensor_type` values ('temperature');
 insert into `sensor_type` values ('humidity');
 insert into `sensor_type` values ('pressure');
 
-insert into `sensor_group`(`name`,`create_user`,`create_time`) values ('database test group','admin',now());
+insert into `sensor_group`(`name`,`create_user`,`create_time`) values ('test','admin',now());
 
 insert into `group_detail`(`group_id`,`type`,`num`) values ('1','thunder',2);
 insert into `group_detail`(`group_id`,`type`,`num`) values ('1','temperature',2);
