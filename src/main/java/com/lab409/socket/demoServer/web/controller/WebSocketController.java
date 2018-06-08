@@ -1,13 +1,9 @@
 package com.lab409.socket.demoServer.web.controller;
 
-import com.lab409.socket.demoServer.model.Sensor;
-import com.lab409.socket.demoServer.model.SensorMsg;
 import com.lab409.socket.demoServer.utils.DataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -22,10 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 @Controller
 @RestController

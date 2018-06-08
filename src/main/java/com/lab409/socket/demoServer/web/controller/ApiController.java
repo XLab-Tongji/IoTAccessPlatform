@@ -78,7 +78,7 @@ public class ApiController {
     @GetMapping("/getSensorsDividedByType")
     public Map<String,List<Sensor>> getSensorsDividedByType(Long id) {
         //后台创建client线程
-        rabbitTemplate.convertAndSend("order","create/1" );
+        rabbitTemplate.convertAndSend("order","create/" + id.toString());
         Map<String,List<Sensor>> map = new HashMap<>();
         for (SensorType type : SensorType.values()) {
             List<Sensor> sensors = dataUtil.sensorMapper.getManyByGroupIdAndType(Long.valueOf(id),type);

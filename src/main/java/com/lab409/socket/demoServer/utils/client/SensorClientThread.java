@@ -33,7 +33,7 @@ public class SensorClientThread implements Runnable {
                     dos.flush();
                     pastTime = Long.valueOf(0);
                     surplusTime = interval = sensor.getInterval();
-                    System.out.println(sensor.getInterval() + " " + sensor.getState().name());
+                    //System.out.println(sensor.getInterval() + " " + sensor.getState().name());
                     if (standardSleepTime >= interval) {
                         Thread.sleep(interval);
                     } else {

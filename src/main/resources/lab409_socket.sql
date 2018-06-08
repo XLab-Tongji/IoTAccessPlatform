@@ -49,7 +49,7 @@ create table `sensor` (
   `state` varchar(20) default 'offline' comment '传感器是否在线',
   `msg` varchar(200) default null comment '该传感器的最近一条消息',
   `time` datetime default now() comment '该传感器状态最近一次更新的时间',
-  `interval` bigint(20) not null default 1 comment '改传感器发送消息的时间间隔',
+  `interval` bigint(20) default 1000 comment '改传感器发送消息的时间间隔(毫秒数)',
   primary key (`id`),
   foreign key (`group_id`) references `sensor_group`(`id`),
   foreign key (`type`) references `sensor_type`(`typename`),
@@ -107,6 +107,8 @@ insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'temperature','6
 insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'pressure','65527',now());
 insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'pressure','65528',now());
 
+
+
 insert into `sensor_msg`(`sensor_id`,`msg`) values (1,'today dont have thunder');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (1,'tomorrow will have thunder');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (2,'today dont have thunder');
@@ -124,6 +126,7 @@ insert into `sensor_msg`(`sensor_id`,`msg`) values (7,'detect pressure');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (8,'no pressure');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (8,'detect pressure');
 
-select * from sensor_group sc ,sensor s where  sc.id = s.group_id and s.type = 'thunder';
 
-select * from sensor;
+#select * from sensor_group sc ,sensor s where  sc.id = s.group_id and s.type = 'thunder';
+
+#select * from sensor;

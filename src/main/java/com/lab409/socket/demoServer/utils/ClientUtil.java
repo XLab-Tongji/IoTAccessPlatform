@@ -45,20 +45,26 @@ public class ClientUtil {
 
     public void updateClientMsg(Long sensorId, Long interval, String msg) {
         SensorClientThread sensorClientThread = repository.get(sensorId);
-        Sensor sensor = sensorClientThread.getSensor();
-        sensor.setLatestMsg(msg);
-        sensor.setInterval(interval);
-        sensorClientThread.setSensor(sensor);
+        if (sensorClientThread != null) {
+            Sensor sensor = sensorClientThread.getSensor();
+            if (sensor != null) {
+                sensor.setLatestMsg(msg);
+                sensor.setInterval(interval);
+                sensorClientThread.setSensor(sensor);
+            }
+        }
     }
 
     public void updateClientState(Long sensorId, SensorState sensorState) {
         SensorClientThread sensorClientThread = repository.get(sensorId);
-        Sensor sensor = sensorClientThread.getSensor();
-        sensor.setState(sensorState);
+        if(sensorClientThread!=null) {
+            Sensor sensor = sensorClientThread.getSensor();
+            if (sensor != null) sensor.setState(sensorState);
+        }
     }
 
     public void destroyClients() {
-        if (repository != null && !repository.isEmpty()) {
+        if (this.repository != null && !repository.isEmpty()) {
             for (SensorClientThread sensorClientThread : repository.values()) {
                 sensorClientThread.destroy();
             }

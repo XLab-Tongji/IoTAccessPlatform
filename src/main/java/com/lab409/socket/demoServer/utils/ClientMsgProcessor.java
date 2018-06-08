@@ -34,16 +34,20 @@ public class ClientMsgProcessor {
     public Object test(String msg) {
         Random random = new Random();
         List<SensorMsg> msgList = new ArrayList<>();
-        //logger.info(msg);
         String[] strings = msg.split("/");
-        SensorMsg message = new SensorMsg();
-        message.setMsg(strings[1] + " " +random.nextInt(100) + "%");
-        message.setSensorId(Long.valueOf(strings[0].trim()));
-        message.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
-
-        //logger.info(message.getSensorId() + "/"+ message.getMsg());
-        msgList.add(message);
-        messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
+        if (strings.length == 2) {
+            SensorMsg message = new SensorMsg();
+            message.setMsg(strings[1] + " " + random.nextInt(100) + "%");
+            message.setSensorId(Long.valueOf(strings[0].trim()));
+            message.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
+            //logger.info(message.getSensorId() + "/"+ message.getMsg());
+            msgList.add(message);
+            messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
+        }
+        else {
+            System.out.println(msg);
+            System.out.println(strings.length);
+        }
         return "clientMsg";
 
     }
