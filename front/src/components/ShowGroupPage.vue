@@ -19,7 +19,6 @@
       </button>
     </div>
     <el-button plain type="prime" @click="addNewGroup()">add new Group</el-button>
-    <el-button plain type="prime" @click="sendId()"> send</el-button>
     <group-form :dialogFormVisible="dialogFormVisible" v-on:cancelForm="dialogFormVisible=false"></group-form>
 
   </div>

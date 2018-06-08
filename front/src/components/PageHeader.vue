@@ -11,7 +11,7 @@
         name: 'page-header',
         data () {
             return {
-                msg: 'lab409 物联网接入平台'
+                msg: 'Lab409 物联网接入平台'
             }
         }
     }
