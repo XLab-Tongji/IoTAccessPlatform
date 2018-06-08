@@ -25,7 +25,7 @@ public class ClientOrderProcessor {
             case "state":
                 logger.info("a new state order: " + order);
                 SensorState sensorState = SensorState.online;
-                if (strings[1].equals("false"))
+                if (strings[2].equals("false"))
                     sensorState = SensorState.offline;
                 clientUtil.updateClientState(id, sensorState);
                 break;

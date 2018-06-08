@@ -21,8 +21,7 @@ public class SensorClientThread implements Runnable {
             socket = new Socket("127.0.0.1", 8090);
             os = socket.getOutputStream();
             dos = new DataOutputStream(os);
-            Long interval = sensor.getInterval();
-            Long pastTime, surplusTime;
+            Long pastTime, surplusTime,interval;
             if (socket != null && os != null) {
                 while (threadState.equals(SensorState.using)) {
                     if (sensor.getState().equals(SensorState.offline) || sensor.getLatestMsg() == null) {
@@ -33,7 +32,8 @@ public class SensorClientThread implements Runnable {
                     dos.writeUTF(msg + "\r\n");
                     dos.flush();
                     pastTime = Long.valueOf(0);
-                    surplusTime = sensor.getInterval();
+                    surplusTime = interval = sensor.getInterval();
+                    System.out.println(sensor.getInterval() + " " + sensor.getState().name());
                     if (standardSleepTime >= interval) {
                         Thread.sleep(interval);
                     } else {
