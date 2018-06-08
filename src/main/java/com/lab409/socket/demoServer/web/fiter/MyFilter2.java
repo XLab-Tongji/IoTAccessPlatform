@@ -22,11 +22,11 @@ public class MyFilter2 implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("myfilter2 destroy");
+        //System.out.println("myfilter2 destroy");
     }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("myfilter2 init");
+       // System.out.println("myfilter2 init");
     }
 }

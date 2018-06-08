@@ -15,19 +15,19 @@ import java.io.IOException;
 public class MyFilter implements Filter {
     @Override
     public void destroy() {
-        System.out.println("myfilter destroy");
+        //System.out.println("myfilter destroy");
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
 
-        System.out.println("this is MyFilter, url :");
+        //System.out.println("this is MyFilter, url :");
         chain.doFilter(request, response);
     }
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        System.out.println("myfilter init");
+        //System.out.println("myfilter init");
     }
 }

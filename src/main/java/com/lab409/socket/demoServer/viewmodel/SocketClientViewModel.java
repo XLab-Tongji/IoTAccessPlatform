@@ -12,8 +12,8 @@ import java.util.List;
 public class SocketClientViewModel extends Sensor {
     private Integer row_id;
 
-    public SocketClientViewModel(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs, Integer row_id) {
-        super(id, sensorGroup, type, descr, host, port, latestMsg, state, changedTime, sensorMsgs);
+    public SocketClientViewModel(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs, Long interval, Integer row_id) {
+        super(id, sensorGroup, type, descr, host, port, latestMsg, state, changedTime, sensorMsgs, interval);
         this.row_id = row_id;
     }
 

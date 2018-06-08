@@ -3,11 +3,15 @@ package com.lab409.socket.demoServer.web.controller;
 import com.lab409.socket.demoServer.model.Sensor;
 import com.lab409.socket.demoServer.model.SensorMsg;
 import com.lab409.socket.demoServer.utils.DataUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,32 +31,50 @@ import java.util.Random;
 @RestController
 @EnableScheduling
 public class WebSocketController {
+
     @Autowired
     SimpMessagingTemplate messagingTemplate;
+
+    @Autowired
+    AmqpTemplate rabbitTemplate;
+
+    @Autowired
+    DataUtil util;
+
+    private Logger logger = LoggerFactory.getLogger(WebSocketController.class);
 
 
     @GetMapping("/asdf")
     public ModelAndView asdf(ModelAndView modelAndView) {
         modelAndView.setViewName("asdf");
-
         return modelAndView;
     }
 
     @MessageMapping("/send")
     //@SendToUser(value = "/topic/send",broadcast = false)
-    @SendTo("/topic/send")
-    public SocketMessage send(SocketMessage msg) {
+    //@SendTo("/topic/send")
+    public void send(SocketMessage msg) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         msg.date = df.format(new Date());
-        return msg;
+        logger.info(msg.toString());
+        //return msg;
     }
+
+
+    @MessageMapping("/order")
+    public void updateMsg(String order) {
+        rabbitTemplate.convertAndSend("order", order);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = df.format(new Date());
+        logger.info(date + " " + order);
+    }
+
 
     @Scheduled(fixedRate = 1000)
     @SendTo("/topic/callback")
     public Object callback() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        messagingTemplate.convertAndSend("/topic/callback", df.format(new Date()));
-        return "callback";
+         return "callback";
     }
 
     @SubscribeMapping("/topic/send")
@@ -65,48 +86,14 @@ public class WebSocketController {
         return msg;
     }
 
-    @Autowired
-    DataUtil util;
-
-
-    @Scheduled(fixedRate = 1000)
-    @SendTo("/topic/client")
-    public Object client() {
-        List<Sensor> list = util.sensorMapper.getManyByGroupId(Long.valueOf(1));
-        for (Sensor sensor : list) {
-            sensor.setSensorGroup(null);
-        }
-        messagingTemplate.convertAndSend("/topic/client", list);
-        return "client";
-    }
-
-    //@MessageMapping("/clientSend")
-    @Scheduled(fixedRate = 1000)
-    @SendTo("/topic/clientMsg")
-    public Object clientMsg() {
-        Random random = new Random();
-        List<SensorMsgTest> msgList = new ArrayList<>();
-
-        for (int i = 1; i < 9; i++) {
-            SensorMsgTest test = new SensorMsgTest();
-            test.id = i;
-            test.msg = "id : " + i + " send: " + random.nextInt(100);
-            msgList.add(test);
-        }
-        messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
-        return "clientMsg";
-
-    }
-
-
-}
-
-class SensorMsgTest {
-    public int id;
-    public String msg;
 }
 
 class SocketMessage {
     public String message;
     public String date;
+
+    @Override
+    public String toString() {
+        return message + " " + date.toString();
+    }
 }

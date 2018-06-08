@@ -142,6 +142,6 @@ public class Sensor implements Serializable {
 
     @Override
     public String toString() {
-        return "id:" + id + " type: " + type.name() + " descr:" + descr + " host:" + host + " port: " + port + " msg: " + latestMsg + " state" + state + " changedTime: " + changedTime;
+        return id + " " + type.name() + " " + descr + " " + host + " " + port + " " + latestMsg + " " + state + " " + changedTime + " " + interval;
     }
 }

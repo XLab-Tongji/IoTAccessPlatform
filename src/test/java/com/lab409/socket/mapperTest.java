@@ -70,6 +70,7 @@ public class mapperTest {
         SensorGroup group = new SensorGroup();
         group.setId(Long.valueOf(2));
         sensor.setSensorGroup(group);
+        sensor.setInterval(Long.valueOf(1));
         sensor.setType(SensorType.thunder);
         sensor.setDescr("made in china");
         sensorMapper.insert(sensor);
@@ -92,6 +93,8 @@ public class mapperTest {
         for (int i = 9; i < 17; i++) {
             msg.setSensorId(Long.valueOf(i));
             msg.setMsg("Hello World " + i + " times");
+            //Timestamp timestamp = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            //Date date = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()))
             msg.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
             msgMapper.insert(msg);
             msg.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
@@ -123,9 +126,18 @@ public class mapperTest {
 
     @Test
     public void insertAll() {
-        //insertGroup();
+        insertGroup();
         insertDetail();
         insertSensor();
         insertMsg();
     }
+
+    @Test
+    public void querySensorByGroupIdAndType() {
+        List<Sensor> list = sensorMapper.getManyByGroupIdAndType(Long.valueOf(1), SensorType.temperature);
+        for (Sensor sensor : list) {
+            System.out.println(sensor);
+        }
+    }
+
 }
