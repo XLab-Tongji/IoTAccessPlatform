@@ -24,11 +24,6 @@ import java.util.Random;
 @Controller
 @RequestMapping("/test")
 public class TestController {
-    @Value("${com.huzehao.name}")
-    String name;
-
-    @Value("${com.huzehao.age}")
-    int age;
 
     @Autowired
     UserMapper userMapper;
@@ -44,20 +39,13 @@ public class TestController {
     private List<Sensor> list = new ArrayList<>();
 
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello() {
-        return name + age;
-    }
-
     @RequestMapping(value = "/index")
     public ModelAndView index(ModelAndView modelAndView) {
         modelAndView.setViewName("index");
 
         List<Sensor> sensorList = new ArrayList<>();
         for (Integer i = 0; i < clientNum; i++) {
-            //Sensor sensor = new Sensor
-              //      (new Long(i), new Long(1),SensorType.valueOf("thunder"), "unknown", "unknown", "unknown", "offline","unknown",new Date());
-            //sensorList.add(sensor);
+
         }
         modelAndView.addObject("sensorList", sensorList);
         return modelAndView;
@@ -80,20 +68,6 @@ public class TestController {
         list.addAll(tmp);
         tmp.clear();
         return list;
-    }
-
-    @RequestMapping(value = "/ajax",method = RequestMethod.GET)
-    public void ajax(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        PrintWriter writer = response.getWriter();
-
-        Random rand = new Random();
-        // 死循环 查询有无数据变化
-        while (true) {
-            Thread.sleep(300); // 休眠300毫秒，模拟处理业务等
-            //int i = rand.nextInt(100); // 产生一个0-100之间的随机数
-            writer.print("asdfasdfasdf");
-            return;
-        }
     }
 
     private Integer refreshed = 0;

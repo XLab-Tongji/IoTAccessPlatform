@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Component
@@ -65,7 +64,7 @@ public class SocketServerHandler extends ChannelInboundHandlerAdapter {
         String information = (String)msg;
         rabbitTemplate.convertAndSend("clientMsg", msg);
         this.receive_num += 1;
-        //logger.info(information + " " + receive_num);
+        logger.info(information + " " + receive_num);
         ctx.writeAndFlush("received\n\r");
     }
 

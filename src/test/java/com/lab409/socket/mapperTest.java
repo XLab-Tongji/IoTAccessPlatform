@@ -67,10 +67,8 @@ public class mapperTest {
     @Test
     public void insertSensor() {
         Sensor sensor = new Sensor();
-        SensorGroup group = new SensorGroup();
-        group.setId(Long.valueOf(2));
-        sensor.setSensorGroup(group);
-        sensor.setInterval(Long.valueOf(1));
+        sensor.setGroupId(Long.valueOf(2));
+        sensor.setInterval(Long.valueOf(1000));
         sensor.setType(SensorType.thunder);
         sensor.setDescr("made in china");
         sensorMapper.insert(sensor);

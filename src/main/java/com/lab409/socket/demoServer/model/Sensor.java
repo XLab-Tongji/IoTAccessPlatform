@@ -6,11 +6,10 @@ import com.lab409.socket.demoServer.enums.SensorType;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 public class Sensor implements Serializable {
     private Long id;
-    private SensorGroup sensorGroup;
+    private Long groupId;
     private SensorType type;
     private String descr;
     private String host;
@@ -19,14 +18,15 @@ public class Sensor implements Serializable {
     private SensorState state;
     private Timestamp changedTime;
     private Long interval;
-    private List<SensorMsg> sensorMsgs;
+    private Long msgNum;
 
 
-    public Sensor() {}
+    public Sensor() {
+    }
 
     public Sensor(Sensor sensor) {
         this.id = sensor.id;
-        this.sensorGroup = sensor.sensorGroup;
+        this.groupId = sensor.groupId;
         this.type = sensor.type;
         this.host = sensor.host;
         this.port = sensor.port;
@@ -34,13 +34,13 @@ public class Sensor implements Serializable {
         this.state = sensor.state;
         this.descr = sensor.descr;
         this.changedTime = sensor.changedTime;
-        this.sensorMsgs = sensor.sensorMsgs;
+        this.msgNum = sensor.msgNum;
         this.interval = sensor.interval;
     }
 
-    public Sensor(Long id, SensorGroup sensorGroup, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, List<SensorMsg> sensorMsgs, Long interval) {
+    public Sensor(Long id, Long groupId, SensorType type, String descr, String host, String port, String latestMsg, SensorState state, Timestamp changedTime, Long interval, Long msgNum) {
         this.id = id;
-        this.sensorGroup = sensorGroup;
+        this.groupId = groupId;
         this.type = type;
         this.descr = descr;
         this.host = host;
@@ -48,8 +48,8 @@ public class Sensor implements Serializable {
         this.latestMsg = latestMsg;
         this.state = state;
         this.changedTime = changedTime;
-        this.sensorMsgs = sensorMsgs;
         this.interval = interval;
+        this.msgNum = msgNum;
     }
 
     public Long getId() {
@@ -60,13 +60,6 @@ public class Sensor implements Serializable {
         this.id = id;
     }
 
-    public SensorGroup getSensorGroup() {
-        return sensorGroup;
-    }
-
-    public void setSensorGroup(SensorGroup sensorGroup) {
-        this.sensorGroup = sensorGroup;
-    }
 
     public SensorType getType() {
         return type;
@@ -124,12 +117,20 @@ public class Sensor implements Serializable {
         this.changedTime = changedTime;
     }
 
-    public List<SensorMsg> getSensorMsgs() {
-        return sensorMsgs;
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void setSensorMsgs(List<SensorMsg> sensorMsgs) {
-        this.sensorMsgs = sensorMsgs;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+    public Long getMsgNum() {
+        return msgNum;
+    }
+
+    public void setMsgNum(Long msgNum) {
+        this.msgNum = msgNum;
     }
 
     public Long getInterval() {
@@ -142,6 +143,6 @@ public class Sensor implements Serializable {
 
     @Override
     public String toString() {
-        return id + " " + type.name() + " " + descr + " " + host + " " + port + " " + latestMsg + " " + state + " " + changedTime + " " + interval;
+        return id + " " + type.name() + " " + descr + " " + host + " " + port + " " + latestMsg + " " + msgNum + " " + state + " " + changedTime + " " + interval;
     }
 }

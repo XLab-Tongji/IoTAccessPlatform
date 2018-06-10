@@ -16,7 +16,7 @@
                   <span style="float : left">msg num :</span>
                 </el-col>
                 <el-col :span="6">
-                  <span style="float : left">100</span>
+                  <span style="float : left">{{scope.row.msgNum}}</span>
                 </el-col>
               </el-row>
               <el-row style="margin-bottom: 0">
@@ -60,7 +60,7 @@
                   <span style="float : left">msg num :</span>
                 </el-col>
                 <el-col :span="6">
-                  <span style="float : left">100</span>
+                  <span style="float : left">{{scope.row.msgNum}}</span>
                 </el-col>
               </el-row>
               <el-row style="margin-bottom: 0">
@@ -152,6 +152,7 @@
           var index = this.tableIndex[msg['sensorId']]
           this.tableData[index]['latestMsg'] = msg['msg']
           this.tableData[index]['changedTime'] = msg['sendTime']
+          this.tableData[index]['msgNum'] += 1
         }
       },
       connect() {

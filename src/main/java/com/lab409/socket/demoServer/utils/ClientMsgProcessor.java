@@ -38,14 +38,14 @@ public class ClientMsgProcessor {
         if (strings.length == 2) {
             SensorMsg message = new SensorMsg();
             message.setMsg(strings[1] + " " + random.nextInt(100) + "%");
-            message.setSensorId(Long.valueOf(strings[0].trim()));
+            message.setSensorId(Long.valueOf(strings[0].substring(2)));
             message.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
             //logger.info(message.getSensorId() + "/"+ message.getMsg());
             msgList.add(message);
             messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
-        }
-        else {
+        } else {
             System.out.println(msg);
+            System.out.println(strings[0].trim().substring(1));
             System.out.println(strings.length);
         }
         return "clientMsg";

@@ -7,9 +7,6 @@
 </head>
 
 <script type="text/javascript">
-    /*$(function () {
-        getClientMsg();
-    });*/
     var time = 0;
 
     function getClientMsg() {

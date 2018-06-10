@@ -6,15 +6,23 @@
           <div slot="header" class="clearfix">
             <div class="groupName">{{g.name}}</div>
             <div class="groupDetail">
-              <span>{{g.createUser}}</span><br>
-
+              <span>{{g.createUser}}</span><br> {{new Date(g.createTime).toLocaleString()}}
             </div>
           </div>
-          <el-form size="mini" :label-position="left" v-for="detail in g.groupDetails" :key="detail.type">
+          <el-row v-for="detail in g.groupDetails" :key="detail.type">
+            <el-col :span="12">
+              <span style="float : left; margin-top : 20px">{{detail.type}}</span>
+            </el-col>
+            <el-col :span="12">
+              <span style="float : left; margin-top : 20px">{{detail.sensorNum}}</span>
+            </el-col>
+          </el-row>
+          <!--<el-form size="mini" :label-position="left" v-for="detail in g.groupDetails" :key="detail.type">
             <el-form-item :label="detail.type + ' : '" label-width="100px">
               <span>{{detail.sensorNum}}</span>
             </el-form-item>
           </el-form>
+          -->
         </el-card>
       </button>
     </div>
@@ -41,6 +49,10 @@ export default {
   },
   mounted() {
     this.getAllGroup()
+    Bus.$on('refresh', data => {
+      this.groupData = data
+      this.dialogFormVisible = false
+    })
   },
   components: { GroupForm },
   methods: {
@@ -75,6 +87,7 @@ export default {
 }
 .groupName {
   float: left;
+  text-align: left;
   vertical-align: middle;
   font-size: 2em;
 }
@@ -106,6 +119,5 @@ export default {
 .box-card {
   float: left;
   margin: 10px;
-  width: 250px;
 }
 </style>

@@ -5,7 +5,7 @@
       </el-table-column>
       <el-table-column label="msg">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.msg" :disabled="!scope.row.active" placeholder="请输入需要发送的内容"></el-input>
+          <el-input v-model="scope.row.latestMsg" :disabled="!scope.row.active" placeholder="请输入需要发送的内容"></el-input>
         </template>
       </el-table-column>
       <el-table-column label="interval" width="100">

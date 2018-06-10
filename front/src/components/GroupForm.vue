@@ -59,11 +59,15 @@ export default {
         })
         .then(res => {
           console.log(res)
+          var result;
+          Bus.$emit('refresh', res.data)
+          
         })
         .catch(err => {
           console.log(err)
         })
-      location.reload()
+      //this.dialogFormVisible = false
+       //location.reload()
     }
   },
   props: ['dialogFormVisible']

@@ -33,8 +33,6 @@ public class ClientUtil {
             List<Sensor> sensors = dataUtil.sensorMapper.getManyByGroupId(groupId);
             for (Sensor sensor : sensors) {
                 SensorClientThread sensorClientThread = new SensorClientThread();
-                sensor.setSensorGroup(null);
-                sensor.setSensorMsgs(null);
                 sensorClientThread.setSensor(sensor);
                 Thread thread1 = new Thread(sensorClientThread);
                 thread1.start();

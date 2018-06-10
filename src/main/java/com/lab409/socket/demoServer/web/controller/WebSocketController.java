@@ -37,15 +37,15 @@ public class WebSocketController {
     private Logger logger = LoggerFactory.getLogger(WebSocketController.class);
 
 
-    @GetMapping("/asdf")
+    @GetMapping("/wstest")
     public ModelAndView asdf(ModelAndView modelAndView) {
-        modelAndView.setViewName("asdf");
+        modelAndView.setViewName("wstest");
         return modelAndView;
     }
 
     @MessageMapping("/send")
     //@SendToUser(value = "/topic/send",broadcast = false)
-    //@SendTo("/topic/send")
+    @SendTo("/topic/send")
     public void send(SocketMessage msg) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         msg.date = df.format(new Date());
@@ -87,6 +87,6 @@ class SocketMessage {
 
     @Override
     public String toString() {
-        return message + " " + date.toString();
+        return message + " " + date;
     }
 }

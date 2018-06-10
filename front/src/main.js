@@ -20,7 +20,7 @@ const router = new VueRouter({
   routes: routers
 })
 
-window.eventBus = new Vue()
+
 
 /* eslint-disable no-new */
 new Vue({

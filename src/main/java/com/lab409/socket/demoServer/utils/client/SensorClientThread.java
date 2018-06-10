@@ -29,6 +29,7 @@ public class SensorClientThread implements Runnable {
                         continue;
                     }
                     String msg = sensor.getId().toString() + "/" + sensor.getLatestMsg();
+                    System.out.println(msg);
                     dos.writeUTF(msg + "\r\n");
                     dos.flush();
                     pastTime = Long.valueOf(0);
