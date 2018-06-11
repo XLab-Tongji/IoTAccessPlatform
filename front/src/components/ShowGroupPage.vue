@@ -9,7 +9,7 @@
               <span>{{g.createUser}}</span><br> {{new Date(g.createTime).toLocaleString()}}
             </div>
           </div>
-          <el-row v-for="detail in g.groupDetails" :key="detail.type">
+          <el-row style="margin : 0" v-for="detail in g.groupDetails" :key="detail.type">
             <el-col :span="12">
               <span style="float : left; margin-top : 20px">{{detail.type}}</span>
             </el-col>
@@ -17,12 +17,6 @@
               <span style="float : left; margin-top : 20px">{{detail.sensorNum}}</span>
             </el-col>
           </el-row>
-          <!--<el-form size="mini" :label-position="left" v-for="detail in g.groupDetails" :key="detail.type">
-            <el-form-item :label="detail.type + ' : '" label-width="100px">
-              <span>{{detail.sensorNum}}</span>
-            </el-form-item>
-          </el-form>
-          -->
         </el-card>
       </button>
     </div>

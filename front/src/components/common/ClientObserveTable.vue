@@ -130,11 +130,11 @@
             }
           })
           .then(res => {
-            console.log(res.data)
-            this.tableData = res.data
-            var index = 0
+            console.log(res.data);
+            this.tableData = res.data;
+            var index = 0;
             for (var i of this.tableData) {
-              console.log(i['id'])
+              console.log(i['id']);
               this.tableIndex[i['id']] = index++
             }
             this.msgSubscription = this.client.subscribe('/topic/clientMsg', this.getClientMsg)

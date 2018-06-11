@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column label="update" width="90">
         <template slot-scope="scope">
-          <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.row.id, scope.row.msg, scope.row.interval)">update
+          <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.row.id, scope.row.latestMsg, scope.row.interval)">update
           </el-button>
         </template>
       </el-table-column>
