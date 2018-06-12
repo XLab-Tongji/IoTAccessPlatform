@@ -8,7 +8,7 @@
 4. netty server 的默认端口是8090, springboot webserver的默认端口是8082, 请确保这两个端口没有占用
 5. 用IDE运行这个项目
 6. 命令行进入 front 文件夹, 运行命令 npm install安装依赖, npm run dev运行前端项目
-7. 需安装mysql以及redis服务器
+7. 需安装mysql、rabbitmq以及redis服务器
 
 
 
