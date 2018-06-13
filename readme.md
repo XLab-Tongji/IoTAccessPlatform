@@ -15,7 +15,9 @@
 
 1. 在首页进行创建 client group,  在列出的group 里选择一个(鼠标点击) , 进入到 client 的控制 和 观测界面
 2. 在控制界面 根据 client 的类型分组控制 , 在观测界面 不对client进行分组显示
-3. 控制界面无法修改client的数量, 只能控制client的state, 发送的消息, 发送的时间间隔
+3. 控制界面无法修改client的数量, 只能控制client的state, 发送的消息, 发送的时
+
+
 
 
 

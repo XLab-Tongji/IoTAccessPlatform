@@ -56,7 +56,7 @@ public class WebSocketController {
 
     @MessageMapping("/order")
     public void updateMsg(String order) {
-        rabbitTemplate.convertAndSend("order", order);
+        rabbitTemplate.convertAndSend("exchange","topic.order", order);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = df.format(new Date());
         logger.info(date + " " + order);

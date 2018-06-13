@@ -47,7 +47,7 @@ export default {
     },
     upload(form) {
       this.$axios
-        .post('http://127.0.0.1:8082/api/addNewGroup', {
+        .post('http://' + myIp + '/api/addNewGroup', {
           createUser: 'huzehao',
           name: this.form.name,
           groupDetails: [

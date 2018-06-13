@@ -8,6 +8,14 @@ import java.text.SimpleDateFormat;
 
 public class StringTest {
     public static void main(String[] args) {
+        String str =  "asdfa";
+        try {
+            Long l = Long.valueOf(str);
+            System.out.println(l);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
         /*SensorType type = SensorType.valueOf("thunder");
         System.out.println(type);
         Date date = new Date(System.currentTimeMillis());

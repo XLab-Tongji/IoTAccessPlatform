@@ -19,7 +19,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * 未采用 websocket 的写法, 使用ajax轮询, 结合 freemaker 模板引擎, 已被废弃, 仅作纪念
+ */
 @RestController
 @Controller
 @RequestMapping("/test")
