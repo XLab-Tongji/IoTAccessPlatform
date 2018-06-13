@@ -65,11 +65,6 @@ public class ApiController {
         return dataUtil.groupMapper.getAll();
     }
 
-    /**
-     * 注意 : 避免 json 循环序列化问题
-     * @return
-     */
-
 
     @Cacheable(value = "groups", key = "100")
     @GetMapping("/getAllGroup")
