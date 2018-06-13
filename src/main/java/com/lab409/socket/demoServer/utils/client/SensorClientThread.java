@@ -8,10 +8,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class SensorClientThread implements Runnable {
-    private Sensor sensor;
+    private volatile Sensor sensor;
     public static final Integer standardSleepTime = 1000;
     private Socket socket = null;
-    private SensorState threadState = SensorState.using;
+    private volatile SensorState threadState = SensorState.using;
 
     @Override
     public void run() {

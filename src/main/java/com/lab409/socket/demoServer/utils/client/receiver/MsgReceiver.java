@@ -1,4 +1,4 @@
-package com.lab409.socket.demoServer.utils;
+package com.lab409.socket.demoServer.utils.client.receiver;
 
 
 import com.lab409.socket.demoServer.model.SensorMsg;
@@ -22,30 +22,38 @@ import java.util.Random;
 
 @Service
 @EnableScheduling
-@RabbitListener(queues = "clientMsg")
-public class ClientMsgProcessor {
+@RabbitListener(queues = "msg")
+public class MsgReceiver {
 
-    private Logger logger = LoggerFactory.getLogger(ClientMsgProcessor.class);
+    private Logger logger = LoggerFactory.getLogger(MsgReceiver.class);
     @Autowired
     SimpMessagingTemplate messagingTemplate;
 
     @RabbitHandler
     @SendTo("/topic/clientMsg")
     public Object test(String msg) {
+        logger.info(Thread.currentThread().getId()+ " " + Thread.currentThread().getName());
         Random random = new Random();
         List<SensorMsg> msgList = new ArrayList<>();
         String[] strings = msg.split("/");
         if (strings.length == 2) {
-            SensorMsg message = new SensorMsg();
-            message.setMsg(strings[1] + " " + random.nextInt(100) + "%");
-            message.setSensorId(Long.valueOf(strings[0].substring(2)));
-            message.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
-            //logger.info(message.getSensorId() + "/"+ message.getMsg());
-            msgList.add(message);
-            messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
+            SensorMsg message= null;
+            try {
+                Long id = Long.valueOf(strings[0].substring(2));
+                message = new SensorMsg();
+                message.setMsg(strings[1] + " " + random.nextInt(100) + "%");
+                message.setSensorId(id);
+                message.setSendTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+            if (message != null)
+                msgList.add(message);
+            if (!msgList.isEmpty())
+                messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
         } else {
             System.out.println(msg);
-            System.out.println(strings[0].trim().substring(1));
+            //System.out.println(strings[0].trim().substring(1));
             System.out.println(strings.length);
         }
         return "clientMsg";

@@ -62,7 +62,7 @@ public class SocketServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String information = (String)msg;
-        rabbitTemplate.convertAndSend("clientMsg", msg);
+        rabbitTemplate.convertAndSend("exchange","topic.msg", msg);
         this.receive_num += 1;
         logger.info(information + " " + receive_num);
         ctx.writeAndFlush("received\n\r");

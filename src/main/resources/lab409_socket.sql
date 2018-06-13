@@ -106,6 +106,7 @@ insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'temperature','6
 insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'temperature','65526',now());
 insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'pressure','65527',now());
 insert into `sensor`(`group_id`,`type`,`port`,`time`) values (1,'pressure','65528',now());
+#insert into `sensor` (`group_id`, `type`, `port`, `time`,`interval`) values (1, 'pressure', '65528',now(),1);
 
 
 
@@ -130,3 +131,8 @@ insert into `sensor_msg`(`sensor_id`,`msg`) values (8,'detect pressure');
 #select * from sensor_group sc ,sensor s where  sc.id = s.group_id and s.type = 'thunder';
 
 #select * from sensor;
+
+
+select * from sensor_msg where sensor_id = 1 order by id desc limit 1
+
+#select count(*) from sensor_msg where sensor_id = 1

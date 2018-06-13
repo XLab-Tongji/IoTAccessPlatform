@@ -13,6 +13,14 @@ public class SensorMsg implements Serializable {
 
     private Date sendTime;
 
+    public SensorMsg() {}
+
+    public SensorMsg(Long sensorId, String msg, Date sendTime) {
+        this.sensorId = sensorId;
+        this.msg = msg;
+        this.sendTime = sendTime;
+    }
+
     public Long getId() {
         return id;
     }

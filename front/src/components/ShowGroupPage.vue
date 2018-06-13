@@ -52,7 +52,7 @@ export default {
   methods: {
     getAllGroup: function() {
       this.$axios
-        .get('http://127.0.0.1:8082/api/getAllGroup')
+        .get('http://' + myIp +'/api/getAllGroup')
         .then(res => {
           this.groupData = res.data
           console.log(res)

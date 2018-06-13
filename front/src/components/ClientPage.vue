@@ -9,7 +9,7 @@
               </client-config-table>
             </el-col>
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="temperatureData.slice(temperatureData.length/2,temperatureData.length)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="temperatureData.slice(temperatureData.length/2,temperatureData.length)">
               </client-config-table>
             </el-col>
           </el-row>
@@ -20,11 +20,11 @@
         <div>
           <el-row :gutter="10">
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="humidityData.slice(0,humidityData.length/2)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="humidityData.slice(0,humidityData.length/2)">
               </client-config-table>
             </el-col>
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="humidityData.slice(humidityData.length/2, humidityData.length)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="humidityData.slice(humidityData.length/2, humidityData.length)">
               </client-config-table>
             </el-col>
           </el-row>
@@ -34,11 +34,11 @@
         <div>
           <el-row :gutter="10">
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="pressureData.slice(0, pressureData.length/2)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="pressureData.slice(0, pressureData.length/2)">
               </client-config-table>
             </el-col>
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="pressureData.slice(pressureData.length/2, pressureData.length)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="pressureData.slice(pressureData.length/2, pressureData.length)">
               </client-config-table>
             </el-col>
           </el-row>
@@ -48,11 +48,11 @@
         <div>
           <el-row :gutter="10">
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="thunderData.slice(0,thunderData.length/2)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="thunderData.slice(0,thunderData.length/2)">
               </client-config-table>
             </el-col>
             <el-col :span="12">
-              <client-config-table  @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="thunderData.slice(thunderData.length/2,thunderData.length)">
+              <client-config-table @updateSendingMsg="updateSendingMsg" @updateClientState="updateClientState" :table-data="thunderData.slice(thunderData.length/2,thunderData.length)">
               </client-config-table>
             </el-col>
           </el-row>
@@ -90,7 +90,7 @@ export default {
   mounted() {
     this.connect()
     this.$axios
-      .get('http://127.0.0.1:8082/api/getSensorsDividedByType', {
+      .get('http://' + myIp + '/api/getSensorsDividedByType', {
         params: {
           id: this.groupId
         }
@@ -130,7 +130,7 @@ export default {
     },
     onFailed() {},
     connect() {
-      this.client = Stomp.client('ws://localhost:8082/my-websocket')
+      this.client = Stomp.client('ws://' + myIp + '/my-websocket')
       this.client.connect({}, this.onConnected, this.onFailed)
     }
   }

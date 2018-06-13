@@ -1,6 +1,7 @@
-package com.lab409.socket.demoServer.utils;
+package com.lab409.socket.demoServer.utils.client.receiver;
 
 import com.lab409.socket.demoServer.enums.SensorState;
+import com.lab409.socket.demoServer.utils.ClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RabbitListener(queues = "order")
-public class ClientOrderProcessor {
+public class OrderReceiver {
 
     @Autowired
     ClientUtil clientUtil;
 
-    private Logger logger = LoggerFactory.getLogger(ClientOrderProcessor.class);
+    private Logger logger = LoggerFactory.getLogger(OrderReceiver.class);
 
     @RabbitHandler
     public void process(String order) {

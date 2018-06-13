@@ -26,9 +26,9 @@
                 <el-col :span="10">
                   <span style="float : left">{{scope.row.descr}}</span>
                 </el-col>
-                 <el-col :span="3">
-                   <span style="float : left">latest :</span>
-                 </el-col>
+                <el-col :span="3">
+                  <span style="float : left">latest :</span>
+                </el-col>
                 <el-col :span="7">
                   <span style="float : left">{{new Date(scope.row.changedTime).toLocaleString()}}</span>
                 </el-col>
@@ -70,9 +70,9 @@
                 <el-col :span="10">
                   <span style="float : left">{{scope.row.descr}}</span>
                 </el-col>
-                 <el-col :span="3">
-                   <span style="float : left">latest :</span>
-                 </el-col>
+                <el-col :span="3">
+                  <span style="float : left">latest :</span>
+                </el-col>
                 <el-col :span="7">
                   <span style="float : left">{{new Date(scope.row.changedTime).toLocaleString()}}</span>
                 </el-col>
@@ -97,70 +97,73 @@
 </template>
 
 <script>
-  import Stomp from 'stompjs'
-  import Bus from '../../eventBus'
+import Stomp from 'stompjs'
+import Bus from '../../eventBus'
 
-  export default {
-    name: 'client-observe-table',
-    data() {
-      return {
-        groupId: 0,
-        tableData: null,
-        tableIndex: {},
-        client: null,
-        clientSubscription: null,
-        msgSubscription: null,
-        websocketData: null
+export default {
+  name: 'client-observe-table',
+  data() {
+    return {
+      groupId: 0,
+      tableData: null,
+      tableIndex: {},
+      client: null,
+      clientSubscription: null,
+      msgSubscription: null,
+      websocketData: null
+    }
+  },
+  props: ['groupId'],
+  mounted() {
+    this.connect()
+  },
+  methods: {
+    jump() {
+      this.$router.push('/')
+    },
+    onConnected(frame) {
+      console.log('connected: ' + frame)
+      this.$axios
+        .get('http://' + myIp +'/api/getSensors', {
+          params: {
+            id: this.groupId
+          }
+        })
+        .then(res => {
+          console.log(res.data)
+          this.tableData = res.data
+          var index = 0
+          for (var i of this.tableData) {
+            console.log(i['id'])
+            this.tableIndex[i['id']] = index++
+          }
+          this.msgSubscription = this.client.subscribe(
+            '/topic/clientMsg',
+            this.getClientMsg
+          )
+        })
+    },
+    onFailed(frame) {
+      console.log('failed: ' + frame)
+    },
+    getClientMsg(frame) {
+      var msgs = JSON.parse(frame.body)
+      //console.log(frame)
+      for (var msg of msgs) {
+        //console.log(msg['sensorId'] + ' ' + msg['msg'])
+        //console.log(this.tableIndex[msg['sensorId']])
+        var index = this.tableIndex[msg['sensorId']]
+        this.tableData[index]['latestMsg'] = msg['msg']
+        this.tableData[index]['changedTime'] = msg['sendTime']
+        this.tableData[index]['msgNum'] += 1
       }
     },
-    props: ['groupId'],
-    mounted() {
-      this.connect()
-    },
-    methods: {
-      jump() {
-        this.$router.push('/')
-      },
-      onConnected(frame) {
-        console.log('connected: ' + frame)
-        this.$axios
-          .get('http://127.0.0.1:8082/api/getSensors', {
-            params: {
-              id: this.groupId
-            }
-          })
-          .then(res => {
-            console.log(res.data);
-            this.tableData = res.data;
-            var index = 0;
-            for (var i of this.tableData) {
-              console.log(i['id']);
-              this.tableIndex[i['id']] = index++
-            }
-            this.msgSubscription = this.client.subscribe('/topic/clientMsg', this.getClientMsg)
-          })
-      },
-      onFailed(frame) {
-        console.log('failed: ' + frame)
-      },
-      getClientMsg(frame) {
-        var msgs = JSON.parse(frame.body)
-        //console.log(frame)
-        for (var msg of msgs) {
-          //console.log(msg['sensorId'] + ' ' + msg['msg'])
-          //console.log(this.tableIndex[msg['sensorId']])
-          var index = this.tableIndex[msg['sensorId']]
-          this.tableData[index]['latestMsg'] = msg['msg']
-          this.tableData[index]['changedTime'] = msg['sendTime']
-          this.tableData[index]['msgNum'] += 1
-        }
-      },
-      connect() {
-        this.client = Stomp.client('ws://localhost:8082/my-websocket')
-        this.client.connect({}, this.onConnected, this.onFailed)
-      }
+    connect() {
+      this.client = Stomp.client('ws://' + myIp + '/my-websocket')
+      this.client.connect({}, this.onConnected, this.onFailed)
     }
   }
+}
 </script>
 
 <style>

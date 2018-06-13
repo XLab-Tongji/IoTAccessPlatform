@@ -20,7 +20,7 @@ const router = new VueRouter({
   routes: routers
 })
 
-
+window.myIp = "127.0.0.1:8082"
 
 /* eslint-disable no-new */
 new Vue({

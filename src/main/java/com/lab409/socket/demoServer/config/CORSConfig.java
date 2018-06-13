@@ -6,6 +6,10 @@ import org.springframework.web.servlet.config.annotation.*;
 
 import static org.springframework.web.cors.CorsConfiguration.ALL;
 
+
+/**
+ *  允许ajax 跨域请求
+ */
 @Configuration
 public class CORSConfig {
     @Bean
