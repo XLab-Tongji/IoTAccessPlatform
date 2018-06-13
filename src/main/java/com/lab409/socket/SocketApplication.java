@@ -27,31 +27,5 @@ public class SocketApplication {
         ConfigurableApplicationContext context = SpringApplication.run(SocketApplication.class, args);
         SocketServer server = context.getBean(SocketServer.class);
         server.start();
-        /*ClientUtil util = context.getBean(ClientUtil.class);
-        SensorMapper mapper = context.getBean(SensorMapper.class);
-        List<Sensor> sensors = mapper.getManyByGroupId(Long.valueOf(1));
-        util.createClients(sensors);
-        */
-        //this.openOneClient();
-
-        /**/
-
-
-
-    }
-    public void openOneClient() {
-        Sensor sensor = new Sensor();
-        sensor.setId(Long.valueOf(1));
-        sensor.setHost("localhost");
-        sensor.setPort("8080");
-        sensor.setState(SensorState.online);
-        sensor.setType(SensorType.temperature);
-        sensor.setChangedTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())));
-        sensor.setLatestMsg("tomorrow is well");
-        sensor.setInterval(Long.valueOf(2000));
-        SensorClientThread sensorClientThread = new SensorClientThread();
-        sensorClientThread.setSensor(sensor);
-        Thread thread = new Thread(sensorClientThread);
-        thread.start();
     }
 }
