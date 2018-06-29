@@ -123,7 +123,7 @@ insert into `sensor_msg`(`sensor_id`,`msg`) values (5,'tomorrow humidity will be
 insert into `sensor_msg`(`sensor_id`,`msg`) values (6,'today humidity is low');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (6,'tomorrow humidity will be high');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (7,'no pressure');
-insert into `sensor_msg`(`sensor_id`,`msg`) values (7,'detect pressure');
+insert into `sensor_ms`(`sensor_id`,`msg`) values (7,'detect pressure');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (8,'no pressure');
 insert into `sensor_msg`(`sensor_id`,`msg`) values (8,'detect pressure');
 

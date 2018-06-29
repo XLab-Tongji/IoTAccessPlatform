@@ -11,7 +11,7 @@ import java.util.List;
 public interface GroupDetailMapper {
     @Insert("insert into group_detail(group_id, type, num) " +
             "values(#{groupId}, #{type}, #{sensorNum})")
-    public void insert(GroupDetail groupDetail);
+    void insert(GroupDetail groupDetail);
 
     @Select("select * from group_detail where group_id = #{id}")
     @Results({
@@ -19,7 +19,7 @@ public interface GroupDetailMapper {
             @Result(property = "type", column = "type"),
             @Result(property = "sensorNum", column = "num")
     })
-    public List<GroupDetail> getManyByGroupId(@Param("id") Long id);
+    List<GroupDetail> getManyByGroupId(@Param("id") Long id);
 
     @Select("select  * from group_detail where group_id = #{id} and type = #{type}")
     @Results({
@@ -27,6 +27,5 @@ public interface GroupDetailMapper {
             @Result(property = "type", column = "type"),
             @Result(property = "sensorNum", column = "num")
     })
-    public GroupDetail getOneByIdAndType(@Param("id") Long id, @Param("type") SensorType type);
-
+    GroupDetail getOneByIdAndType(@Param("id") Long id, @Param("type") SensorType type);
 }

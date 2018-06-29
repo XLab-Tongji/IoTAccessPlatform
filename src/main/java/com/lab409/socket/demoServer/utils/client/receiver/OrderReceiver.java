@@ -19,7 +19,7 @@ public class OrderReceiver {
     private Logger logger = LoggerFactory.getLogger(OrderReceiver.class);
 
     @RabbitHandler
-    public void process(String order) {
+    public void executeOrder(String order) {
         String[] strings = order.split("/");
         Long id = Long.valueOf(strings[1]);
         switch (strings[0]) {
