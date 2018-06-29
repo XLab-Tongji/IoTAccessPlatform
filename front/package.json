@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "echarts": "^4.1.0",
     "element-ui": "^2.4.0",
     "net": "^1.0.2",
     "sockjs": "^0.3.19",
