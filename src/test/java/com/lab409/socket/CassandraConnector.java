@@ -1,8 +1,7 @@
-package com.lab409.socket.demoServer.utils;
+package com.lab409.socket;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 
 

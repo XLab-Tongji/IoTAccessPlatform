@@ -15,6 +15,7 @@ import java.sql.SQLSyntaxErrorException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RabbitListener(queues = "storage")
@@ -28,9 +29,9 @@ public class StorageReceiver {
     DataUtil util;
 
 
-    /*@Autowired
+    @Autowired
     @Qualifier("cassadra_session")
-    Session session;*/
+    Session session;
 
     @RabbitHandler
     public void storage(String str) {
@@ -42,7 +43,7 @@ public class StorageReceiver {
                             strs[1],
                             Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
                     util.msgMapper.insert(msg);
-                    //insert(msg);
+                    insert(msg);
                 } catch (Exception e) {
                     System.out.println(e.toString());
                 }
@@ -56,15 +57,13 @@ public class StorageReceiver {
     }
 
     private void insert(SensorMsg msg) {
-        /*StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         String[] msgs = msg.getMsg().split(" ");
-        //System.out.println(msg+"end");
-        //System.out.println("length is " + msgs.length);
         builder.append("INSERT INTO terminal (terminal_description, peak, lasting_time, polarity, date, unit1, unit2)");
         builder.append(" VALUES(\'");
-        builder.append(msg.getId());
+        builder.append("9");
         builder.append("#雷电分析仪");
-        builder.append("\',\'");
+        builder.append("\',");
         if (msgs.length < 3) {
             System.out.println("length is too short");
             builder.append("\'invaild\'");
@@ -72,13 +71,13 @@ public class StorageReceiver {
             builder.append("\'invaild\'");
             builder.append(",");
             builder.append("\'invaild\'");
-            builder.append("\',\'");
+            builder.append("\'");
         }else {
             System.out.println("length is enough");
-            builder.append(msg.getMsg().split(" ")[0]);
-            builder.append("\',\'");
+            builder.append(new Random().nextInt(80)+30);
+            builder.append(",");
             builder.append(msg.getMsg().split(" ")[1]);
-            builder.append("\',\'");
+            builder.append(",\'");
             builder.append(msg.getMsg().split(" ")[2]);
             builder.append("\',\'");
         }
@@ -87,12 +86,8 @@ public class StorageReceiver {
         builder.append("千安");
         builder.append("\',\'");
         builder.append("毫秒");
-        builder.append("\')");
+        builder.append("\');");
         System.out.println(builder.toString());
-        session.execute(builder.toString());*/
-        String terminalData = "'胡泽豪的雷电分析仪',1.3,598,'正','2018-6-21 06:39:35','千安','微秒'";
-        String terminalPrefix = "INSERT INTO terminal (terminal_description, peak, lasting_time, polarity, date, unit1, unit2)"
-                + " VALUES(";
-        //session.execute(terminalPrefix + terminalData + ");");
+        session.execute(builder.toString());
     }
 }

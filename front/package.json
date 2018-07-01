@@ -17,8 +17,10 @@
     "sockjs": "^0.3.19",
     "stompjs": "^2.3.3",
     "vue": "^2.5.2",
+    "vue-chart": "^2.0.0",
     "vue-router": "^3.0.1",
-    "vue-stomp": "0.0.5"
+    "vue-stomp": "0.0.5",
+    "vue2-highcharts": "^1.2.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
