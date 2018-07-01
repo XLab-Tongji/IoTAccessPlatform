@@ -12,7 +12,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import org.springframework.stereotype.Service;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class MsgReceiver {
 
     @RabbitHandler
     @SendTo("/topic/clientMsg")
-    public Object test(String msg) {
+    public Object sendMsg(String msg) {
         logger.info(Thread.currentThread().getId()+ " " + Thread.currentThread().getName());
         Random random = new Random();
         List<SensorMsg> msgList = new ArrayList<>();
@@ -53,10 +52,8 @@ public class MsgReceiver {
                 messagingTemplate.convertAndSend("/topic/clientMsg", msgList);
         } else {
             System.out.println(msg);
-            //System.out.println(strings[0].trim().substring(1));
             System.out.println(strings.length);
         }
         return "clientMsg";
-
     }
 }

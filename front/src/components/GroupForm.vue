@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="dialog" :show-close="false" :visible="dialogFormVisible">
+  <el-dialog title="add new group" :show-close="false" :visible="dialogFormVisible">
     <el-form :model="form">
       <el-form-item label="group name" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -59,15 +59,12 @@ export default {
         })
         .then(res => {
           console.log(res)
-          var result;
+          var result
           Bus.$emit('refresh', res.data)
-          
         })
         .catch(err => {
           console.log(err)
         })
-      //this.dialogFormVisible = false
-       //location.reload()
     }
   },
   props: ['dialogFormVisible']

@@ -109,7 +109,7 @@ public class mapperTest {
     }
 
     @Test
-    public void queryAll() {
+    public void queryGroups_Sensors_Msgs() {
         List<SensorGroup> groups = groupMapper.getAll();
         for (SensorGroup g : groups) {
             System.out.println(g);
@@ -121,6 +121,7 @@ public class mapperTest {
             }
         }
     }
+
 
     @Test
     public void insertAll() {

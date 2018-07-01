@@ -5,7 +5,17 @@
       </el-table-column>
       <el-table-column label="msg">
         <template slot-scope="scope">
-          <el-input v-model="scope.row.latestMsg" :disabled="!scope.row.active" placeholder="请输入需要发送的内容"></el-input>
+          <el-form style="padding : 0" label-position="left" label-width="100px">
+            <el-form-item label="peak val(kA)">
+              <el-input size="mini" v-model="scope.row.peak" :disabled="!scope.row.active" placeholder="请输入持续时间"></el-input>
+            </el-form-item>
+            <el-form-item label="duration(ms)">
+              <el-input size="mini" v-model="scope.row.duration" :disabled="!scope.row.active" placeholder="请输入持续时间"></el-input>
+            </el-form-item>
+            <el-form-item label="polar   (+-)">
+              <el-input size="mini" v-model="scope.row.polar" :disabled="!scope.row.active" placeholder="请输入电荷极性"></el-input>
+            </el-form-item>
+          </el-form>
         </template>
       </el-table-column>
       <el-table-column label="interval" width="100">
@@ -15,7 +25,7 @@
       </el-table-column>
       <el-table-column label="update" width="90">
         <template slot-scope="scope">
-          <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.row.id, scope.row.latestMsg, scope.row.interval)">update
+          <el-button size="mini" :disabled="!scope.row.active" @click="updateSendingMsg(scope.row.id, scope.row.peak + ' ' + scope.row.duration + ' ' + scope.row.polar , scope.row.interval)">update
           </el-button>
         </template>
       </el-table-column>
@@ -29,11 +39,13 @@
 </template>
 
 <script>
+import ClientMsg from './ClientMsg.vue'
 export default {
   name: 'client-config-table',
   data() {
     return {}
   },
+  components : {ClientMsg},
   mounted() {},
   props: ['tableData', 'clientType'],
   methods: {
@@ -45,6 +57,10 @@ export default {
       this.$emit('updateClientState', id, active)
       //this.$axios.post('http://127.0.0.1:8082/')
       //console.log('id: ' + id + 'active: ' + active)
+    }
+    ,
+    getValue(Str) {
+      return Str.split(" ")[0];
     }
   }
 }

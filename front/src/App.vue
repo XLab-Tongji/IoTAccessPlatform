@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <page-header></page-header>
+    <!--<echart-test></echart-test>-->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import PageHeader from './components/PageHeader.vue'
-
+import EchartTest from './components/test/EchartTest.vue'
 export default {
   name: 'App',
-  components: { PageHeader }
+  components: { PageHeader , EchartTest}
 }
 </script>
 
